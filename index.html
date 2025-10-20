@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BDtronics Lab — Flexible Sustainable Electronics</title>
+  <meta name="description" content="BDtronics Lab: research in flexible and biodegradable electronics. People, facilities, publications and contacts." />
+  <meta name="theme-color" content="#0f1a1a" />
+  <!-- Open Graph (social preview image when sharing links) -->
+  <meta property="og:title" content="BDtronics Lab" />
+  <meta property="og:description" content="Flexible Sustainable Electronics" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta property="og:url" content="https://example.org" />
+  <!-- Favicon: small icon shown in the browser tab -->
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!-- Preload: ask the browser to fetch the logo early for faster paint -->
+  <link rel="preload" href="/assets/logo.svg" as="image" />
+  <style>
+    /* Design tokens (reusable values for colors, spacing, etc.) */
+    :root {
+      --bd-green: #6aa270;
+      --bd-ink: #2c3335;
+      --bd-bg: #fcfcfb;
+      --bd-bg-elev: #ffffff;
+      --bd-border: #e6e8e7;
+      --bd-accent: #6aa270;
+      --bd-ink-on-dark: #eef1ee;
+      --container: 1120px;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    /* Dark mode: automatic if the user prefers dark colors */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bd-bg: #0f1516;
+        --bd-bg-elev: #121b1c;
+        --bd-ink: #e8ece9;
+        --bd-border: #233031;
+        --bd-ink-on-dark: #f6f8f6;
+      }
+    }
+
+    /* Base styles */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; color: var(--bd-ink); background: radial-gradient(1200px 600px at 50% -200px, rgba(106,162,112,.08), transparent 70%), var(--bd-bg); line-height: 1.55; }
+    img { max-width: 100%; height: auto; }
+    a { color: var(--bd-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
+
+    /* Header / navigation */
+    header { position: sticky; top: 0; z-index: 20; background: color-mix(in oklab, var(--bd-bg) 92%, transparent); backdrop-filter: saturate(120%) blur(6px); border-bottom: 1px solid var(--bd-border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 0; }
+    .brand { display: flex; align-items: center; gap: .75rem; }
+    .brand img { width: 44px; height: 44px; }
+    .brand h1 { font-size: 1.1rem; margin: 0; font-weight: 700; letter-spacing: .2px; }
+    .tagline { display: block; font-size: .8rem; opacity: .8; font-weight: 500; }
+
+    .menu { display: flex; gap: 1rem; align-items: center; }
+    .menu a { padding: .5rem .7rem; border-radius: 10px; font-weight: 600; }
+    .menu a:hover { background: color-mix(in oklab, var(--bd-green) 14%, transparent); text-decoration: none; }
+    .burger { display: none; background: transparent; border: 1px solid var(--bd-border); border-radius: 10px; padding: .5rem .6rem; }
+
+    @media (max-width: 860px) {
+      .menu { display: none; }
+      .burger { display: inline-flex; }
+    }
+
+    /* Hero (the first, attention‑grabbing section at the top of the Home page) */
+    .hero { padding: 5rem 0 3rem; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center; }
+    .hero h2 { font-size: clamp(1.8rem, 2.4vw + 1rem, 3rem); line-height: 1.15; margin: 0 0 1rem; }
+    .hero p { font-size: 1.05rem; margin: 0 0 1.25rem; }
+    .cta { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; background: var(--bd-green); color: white; border-radius: 12px; font-weight: 700; box-shadow: var(--shadow); border: none; }
+    .cta:hover { filter: brightness(1.03); cursor: pointer; }
+    .hero-logo { display: grid; place-items: center; background: var(--bd-bg-elev); border: 1px solid var(--bd-border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+
+    /* Sections */
+    section { padding: 3.2rem 0; }
+    h3 { font-size: 1.4rem; margin: 0 0 1rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card { background: var(--bd-bg-elev); border: 1px solid var(--bd-border); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+    .muted { opacity: .8; }
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } .cards { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--bd-border); padding: 2rem 0; font-size: .95rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+    @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="BDtronics Lab, home">
+        <img src="/assets/logo.svg" alt="BDtronics Lab logo" />
+        <div>
+          <h1>BDtronics Lab</h1>
+          <span class="tagline">Flexible Sustainable Electronics</span>
+        </div>
+      </a>
+      <nav class="menu" aria-label="Site sections">
+        <a href="#research">Research</a>
+        <a href="#people">People</a>
+        <a href="#publications">Publications</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero container" aria-labelledby="tit-hero">
+      <div class="hero-grid">
+        <div>
+          <h2 id="tit-hero">Flexible & biodegradable electronics for a circular future</h2>
+          <p>We engineer devices and materials that combine electronic performance with environmental responsibility — from bio‑derived substrates and printing to end‑of‑life design.</p>
+          <div style="display:flex; gap:.6rem; flex-wrap: wrap;">
+            <a class="cta" href="#research">Explore research →</a>
+            <a class="cta" style="background:transparent;color:var(--bd-accent);border:1px solid var(--bd-accent)" href="#publications">Read publications</a>
+          </div>
+        </div>
+        <div class="hero-logo" aria-hidden="true">
+          <img src="/assets/logo-negative.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="container">
+      <h3>Research areas</h3>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h4>Materials & substrates</h4>
+          <p class="muted">Bio‑derived polymers, functional paper, compostable films with tuned mechanical properties.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h4>Processes & fabrication</h4>
+          <p class="muted">Inkjet and screen printing, low‑temperature patterning, dissolvable interconnects.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h4>Devices & systems</h4>
+          <p class="muted">Sensors, passive/active circuits, power management, integration with biodegradable packaging.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="people" class="container">
+      <h3>People</h3>
+      <p class="muted">Add PI, researchers, and PhD candidates. Use optimized WebP photos, roles, contact info, and links (GitHub/ORCID).</p>
+    </section>
+
+    <section id="publications" class="container">
+      <h3>Selected publications</h3>
+      <ul>
+        <li><strong>Author, A.</strong> et al. (2025). Paper title. <em>Journal</em>. <a href="#">PDF</a></li>
+        <li><strong>Author, B.</strong> et al. (2024). Title. <em>Conference</em>. <a href="#">DOI</a></li>
+      </ul>
+    </section>
+
+    <section id="news" class="container">
+      <h3>News</h3>
+      <article class="card">
+        <p><time datetime="2025-10-19">19 Oct 2025</time> — Group website launched 🎉</p>
+      </article>
+    </section>
+
+    <section id="contact" class="container">
+      <h3>Contact</h3>
+      <p class="muted">Lab address, general email (e.g., <a href="mailto:info@bdtronicslab.org">info@bdtronicslab.org</a>), social links, and a map.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>© <span id="year"></span> BDtronics Lab — <span class="muted">Flexible Sustainable Electronics</span></div>
+      <div style="text-align:right;">
+        <a href="#content">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple mobile menu
+    const burger = document.querySelector('.burger');
+    burger?.addEventListener('click', () => {
+      const existing = document.getElementById('mobileMenu');
+      if (existing) { existing.remove(); burger.setAttribute('aria-expanded', 'false'); return; }
+      const nav = document.createElement('nav');
+      nav.id = 'mobileMenu';
+      nav.setAttribute('aria-label', 'Mobile menu');
+      nav.style.borderTop = '1px solid var(--bd-border)';
+      nav.style.padding = '.5rem 1rem 1rem';
+      nav.innerHTML = `
+        <div class="container" style="display:grid; gap:.25rem;">
+          <a href="#research">Research</a>
+          <a href="#people">People</a>
+          <a href="#publications">Publications</a>
+          <a href="#news">News</a>
+          <a href="#contact">Contact</a>
+        </div>`;
+      document.querySelector('header')?.appendChild(nav);
+      burger.setAttribute('aria-expanded', 'true');
+    });
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

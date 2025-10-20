@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="420" height="120">
+  <rect width="100%" height="100%" fill="none"/>
+  <g font-family="Inter, Arial, sans-serif" font-weight="800" font-size="64" fill="#6aa270">
+    <text x="10" y="78">BD</text>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#2c3335">
+    <text x="130" y="78">tronics</text>
+  </g>
+  <path d="M20 95 Q 160 130 300 95" fill="none" stroke="#6aa270" stroke-width="6" stroke-linecap="round"/>
+  <g font-family="Inter, Arial, sans-serif" font-size="20" fill="#2c3335">
+    <text x="10" y="112">Flexible Sustainable Electronics</text>
+  </g>
+</svg>
