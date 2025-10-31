@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Francesco Maita",
+    "initials": "FM",
+    "category": "lead",
+    "tags": ["Researcher", "Electronic Engineer", "Co-lead" ],
+    "bio": "Coordinates circuit design and integration for biodegradable platforms, bridging lab research with partners.",
+    "image": "francesco_maita.jpg"
+  },
+  {
+    "name": "Luca Maiolo",
+    "initials": "LM",
+    "category": "lead",
+    "tags": ["Senior Researcher", "Physicist", "Co-lead"],
+    "bio": "Leads materials development with a focus on microfabrication strategies for transient electronic devices",
+    "image": "luca_maiolo.jpg"
+  },
+  {
+    "name": "Elena Palmieri",
+    "initials": "EP",
+    "category": "postdoc",
+    "tags": ["Researcher", "Materials Chemist"],
+    "bio": "Develops biodegradable and compostable polymers for transient electronic applications with a focus on sustainability.",
+    "image": "elena_palmieri.jpg"
+  },
+  {
+    "name": "Ivano Lucarini",
+    "initials": "IL",
+    "category": "postdoc",
+    "tags": ["Technologist", "Physicist"],
+    "bio": "Expert on microfabrication and characterization of flexible electronic devices.",
+    "image": "ivano_lucarini.jpg"
+  },
+  {
+    "name": "Luca Montaina",
+    "initials": "LM",
+    "category": "post-doc",
+    "tags": ["Post-doc", "Materials Scientist"],
+    "bio": "3D printing and additive manufacturing of biodegradable materials for transient electronics.",
+    "image": "luca_montaina.jpg"
+  }
+]
