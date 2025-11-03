@@ -29,6 +29,15 @@
       --container: 1120px;
       --radius: 16px;
       --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --bd-nav-base: color-mix(in oklab, var(--bd-green) 54%, var(--bd-bg) 46%);
+      --bd-nav-bg: color-mix(in oklab, var(--bd-nav-base) 60%, white 40%);
+      --bd-nav-border: color-mix(in oklab, var(--bd-ink) 74%, var(--bd-green) 26%);
+      --bd-nav-link: color-mix(in oklab, var(--bd-green) 42%, var(--bd-ink) 58%);
+      --facilities-gap: clamp(1rem, 3vw, 1.6rem);
+      --facilities-peek: clamp(2rem, 12vw, 6rem);
+      --facility-card-width: clamp(260px, 28vw, 320px);
+      --facility-card-focus-scale: 1.05;
+      --facilities-ease: cubic-bezier(0.16, 0.75, 0.25, 1);
     }
     /* Dark mode: automatic if the user prefers dark colors */
     @media (prefers-color-scheme: dark) {
@@ -38,6 +47,10 @@
         --bd-ink: #e8ece9;
         --bd-border: #233031;
         --bd-ink-on-dark: #f6f8f6;
+        --bd-nav-base: color-mix(in oklab, var(--bd-bg) 88%, white 12%);
+        --bd-nav-bg: color-mix(in oklab, var(--bd-nav-base) 95%, var(--bd-bg) 5%);
+        --bd-nav-border: color-mix(in oklab, var(--bd-border) 70%, black 30%);
+        --bd-nav-link: color-mix(in oklab, var(--bd-ink) 80%, var(--bd-green) 20%);
       }
     }
 
@@ -77,10 +90,12 @@
       }
 
     /* Header / navigation */
-    .site-header { position: sticky; top: 0; z-index: 1000; background: color-mix(in oklab, var(--bd-bg) 92%, white 8%); backdrop-filter: saturate(120%) blur(6px); border-bottom: 1px solid var(--bd-border); }
+    .site-header { position: sticky; top: 0; z-index: 1000; background-color: var(--bd-nav-bg); background: color-mix(in oklab, var(--bd-nav-bg) 92%, white 8%); backdrop-filter: saturate(120%) blur(6px); border-bottom: 1px solid var(--bd-nav-border); box-shadow: none; }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 0; }
-    .brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; }
+    .brand { display: flex; align-items: center; gap: 1rem; }
     .brand-logos { display: flex; align-items: center; }
+    .brand-logo-link { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+    .brand-home { display: inline-flex; text-decoration: none; color: inherit; }
     .brand-logo { width: 140px; height: auto; object-fit: contain; }
     .brand-logo-cnr { width: 140px; height: auto; }
     .brand-text { display: flex; flex-direction: column; gap: 0.25rem; }
@@ -89,7 +104,7 @@
     .brand-affiliation { font-size: 0.78rem; color: color-mix(in oklab, var(--bd-ink) 70%, white 30%); font-weight: 500; }
 
     .menu { display: flex; gap: 1rem; align-items: center; }
-    .menu a { padding: .5rem .7rem; border-radius: 10px; font-weight: 600; }
+    .menu a { padding: .5rem .7rem; border-radius: 10px; font-weight: 600; color: var(--bd-nav-link); }
     .menu a:hover { background: color-mix(in oklab, var(--bd-green) 14%, transparent); text-decoration: none; }
     .burger { display: none; background: transparent; border: 1px solid var(--bd-border); border-radius: 10px; padding: .5rem .6rem; }
 
@@ -99,6 +114,40 @@
         }
         .burger {
           display: inline-flex;
+        }
+      }
+
+      @media (max-width: 980px) {
+        :root {
+          --facility-card-width: clamp(240px, 32vw, 300px);
+          --facilities-peek: clamp(0.9rem, 8vw, 4rem);
+        }
+      }
+
+      @media (max-width: 720px) {
+        :root {
+          --facility-card-width: clamp(230px, 76vw, 310px);
+          --facilities-peek: clamp(0.75rem, 10vw, 2.1rem);
+        }
+        .facility-card {
+          gap: 0.7rem;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .facilities-viewport {
+          padding-block: 0.5rem 2rem;
+          scroll-padding-inline: 1.25rem;
+        }
+        .facilities-track {
+          padding-inline: 1.25rem;
+        }
+        .facility-card {
+          flex: 0 0 calc(100% - 2.5rem);
+        }
+        .facilities-carousel::before,
+        .facilities-carousel::after {
+          width: 1.25rem;
         }
       }
 
@@ -146,6 +195,12 @@
         padding: 1.5rem;
         box-shadow: var(--shadow);
       }
+      .hero-logo picture,
+      .hero-logo img {
+        width: min(100%, 552px);
+        height: auto;
+        display: block;
+      }
 
       /* Sections */
       section {
@@ -170,6 +225,142 @@
         flex-direction: column;
         gap: 0.75rem;
       }
+      .work-callout {
+        background: color-mix(in oklab, var(--bd-green) 12%, white);
+        border: 1px solid color-mix(in oklab, var(--bd-green) 28%, transparent);
+        border-radius: calc(var(--radius) - 4px);
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+        display: grid;
+        gap: 0.5rem;
+        box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--bd-green) 14%, transparent);
+      }
+      .work-callout strong {
+        font-weight: 700;
+        color: color-mix(in oklab, var(--bd-ink) 90%, white 10%);
+      }
+      .opportunities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1rem;
+      }
+      .opportunity-card {
+        background: var(--bd-bg-elev);
+        border: 1px solid color-mix(in oklab, var(--bd-ink) 26%, var(--bd-border) 74%);
+        border-radius: calc(var(--radius) - 4px);
+        padding: 1.2rem;
+        box-shadow: var(--shadow), inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-height: 100%;
+      }
+      .opportunity-type {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        background: color-mix(in oklab, var(--bd-green) 18%, transparent);
+        color: color-mix(in oklab, var(--bd-ink) 85%, white 15%);
+        border: 1px solid color-mix(in oklab, var(--bd-green) 22%, transparent);
+      }
+      .opportunity-card h4 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+      .opportunity-card p {
+        margin: 0;
+        line-height: 1.45;
+        color: color-mix(in oklab, var(--bd-ink) 82%, white 18%);
+      }
+      .opportunity-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.4rem 0 0;
+        padding: 0;
+        list-style: none;
+        font-size: 0.85rem;
+        color: color-mix(in oklab, var(--bd-ink) 70%, white 30%);
+      }
+      .opportunity-meta li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        background: color-mix(in oklab, var(--bd-border) 20%, transparent);
+        border: 1px solid color-mix(in oklab, var(--bd-border) 36%, transparent);
+      }
+      .opportunity-meta strong {
+        font-weight: 700;
+        color: color-mix(in oklab, var(--bd-ink) 78%, white 22%);
+      }
+      .opportunity-meta a {
+        color: inherit;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .opportunity-actions {
+        margin-top: auto;
+        display: flex;
+        justify-content: center;
+      }
+      .opportunity-apply {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 0.5rem 1.1rem;
+        border-radius: 12px;
+        background: var(--bd-bg-elev);
+        color: color-mix(in oklab, var(--bd-green) 68%, var(--bd-ink) 32%);
+        font-weight: 700;
+        text-decoration: none;
+        border: 2px solid color-mix(in oklab, var(--bd-green) 60%, transparent);
+        box-shadow: none;
+        transition: background-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+      }
+      .opportunity-apply:hover {
+        background: color-mix(in oklab, var(--bd-green) 8%, var(--bd-bg-elev));
+        box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--bd-green) 18%, transparent);
+        transform: translateY(-1px);
+      }
+      .opportunity-apply:focus-visible {
+        outline: 3px solid color-mix(in oklab, var(--bd-accent) 45%, transparent);
+        outline-offset: 3px;
+      }
+      .work-open-call {
+        margin-top: 2rem;
+        padding: 1.2rem 1.4rem;
+        border-radius: calc(var(--radius) - 4px);
+        border: 1px dashed color-mix(in oklab, var(--bd-accent) 40%, transparent);
+        background: color-mix(in oklab, var(--bd-accent) 10%, transparent);
+        display: grid;
+        gap: 0.4rem;
+      }
+      .work-open-call h4 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+      .work-open-call p {
+        margin: 0;
+        color: color-mix(in oklab, var(--bd-ink) 78%, white 22%);
+      }
+      .work-open-call a {
+        font-weight: 600;
+        color: var(--bd-accent);
+        text-decoration: none;
+      }
+      .work-status {
+        margin: 0 0 1.5rem;
+        color: color-mix(in oklab, var(--bd-ink) 70%, white 30%);
+      }
       .card-visual {
         margin-top: auto;
         border-radius: calc(var(--radius) - 4px);
@@ -182,21 +373,83 @@
         border: 1px solid color-mix(in oklab, var(--bd-ink) 26%, var(--bd-border) 74%);
         box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
       }
-      .facilities-grid {
+      .facilities-carousel {
         margin-top: 2rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1rem;
+        position: relative;
+      }
+      .facilities-viewport {
+        overflow-x: auto;
+        overflow-y: visible;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-block: 1rem 2.75rem;
+        scroll-padding-inline: calc((100% - var(--facility-card-width)) / 2 + var(--facilities-gap) / 2);
+      }
+      .facilities-viewport::-webkit-scrollbar {
+        height: 10px;
+      }
+      .facilities-viewport::-webkit-scrollbar-track {
+        background: color-mix(in oklab, var(--bd-border) 18%, transparent);
+        border-radius: 999px;
+      }
+      .facilities-viewport::-webkit-scrollbar-thumb {
+        background: color-mix(in oklab, var(--bd-ink) 20%, transparent);
+        border-radius: 999px;
+      }
+      .facilities-track {
+        display: flex;
+        gap: var(--facilities-gap);
+        align-items: stretch;
+        padding-inline: calc(var(--facilities-peek) - var(--facilities-gap) / 2);
+      }
+      .facilities-carousel::before,
+      .facilities-carousel::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: calc(var(--facilities-peek) * 0.45);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .facilities-carousel::before {
+        left: 0;
+        background: linear-gradient(
+          90deg,
+          color-mix(in oklab, var(--bd-bg) 92%, transparent) 0%,
+          color-mix(in oklab, var(--bd-bg) 20%, transparent) 80%,
+          transparent 100%
+        );
+      }
+      .facilities-carousel::after {
+        right: 0;
+        background: linear-gradient(
+          270deg,
+          color-mix(in oklab, var(--bd-bg) 92%, transparent) 0%,
+          color-mix(in oklab, var(--bd-bg) 20%, transparent) 80%,
+          transparent 100%
+        );
       }
       .facility-card {
-        background: var(--bd-bg-elev);
-        border: 1px solid var(--bd-border);
+        flex: 0 0 var(--facility-card-width);
+        background: color-mix(in oklab, var(--bd-bg-elev) 92%, white 8%);
+        border: 1px solid color-mix(in oklab, var(--bd-border) 78%, var(--bd-ink) 22%);
         border-radius: calc(var(--radius) - 4px);
-        padding: 1.2rem;
-        box-shadow: var(--shadow);
+        padding: 1.1rem;
+        box-shadow: 0 12px 28px rgba(22, 34, 28, 0.14);
         display: flex;
         flex-direction: column;
-        gap: 0.9rem;
+        gap: 0.85rem;
+        scroll-snap-align: center;
+        transition: transform 0.45s var(--facilities-ease), box-shadow 0.45s var(--facilities-ease), opacity 0.3s ease;
+        opacity: 0.85;
+      }
+      .facility-card.is-focused {
+        transform: scale(var(--facility-card-focus-scale));
+        opacity: 1;
+        z-index: 2;
+        box-shadow: 0 22px 52px rgba(20, 32, 28, 0.22);
+        border-color: color-mix(in oklab, var(--bd-ink) 32%, var(--bd-border) 68%);
       }
       .facility-media {
         position: relative;
@@ -216,15 +469,29 @@
       .facility-content {
         display: flex;
         flex-direction: column;
-        gap: 0.6rem;
+        gap: 0.7rem;
+      }
+      .facility-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
       }
       .facility-card h4 {
         margin: 0;
-        font-size: 1.05rem;
+        font-size: 1.04rem;
+        transition: font-size 0.3s var(--facilities-ease);
       }
       .facility-card p {
         margin: 0;
-        line-height: 1.45;
+        line-height: 1.5;
+        font-size: 0.87rem;
+        transition: font-size 0.3s var(--facilities-ease);
+      }
+      .facility-card.is-focused h4 {
+        font-size: 1.16rem;
+      }
+      .facility-card.is-focused p {
+        font-size: 0.94rem;
       }
       .facility-capabilities {
         display: flex;
@@ -234,21 +501,89 @@
       .facility-cap {
         padding: 0.25rem 0.55rem;
         border-radius: 999px;
-        background: color-mix(in oklab, var(--bd-green) 14%, transparent);
-        border: 1px solid color-mix(in oklab, var(--bd-green) 18%, transparent);
+        background: color-mix(in oklab, var(--bd-green) 12%, transparent);
+        border: 1px solid color-mix(in oklab, var(--bd-green) 20%, transparent);
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.02em;
         color: color-mix(in oklab, var(--bd-ink) 82%, white 18%);
       }
+      .facility-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
       .facility-specs {
         list-style: disc;
         padding-left: 1.1rem;
         margin: 0;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
+        transition: font-size 0.3s var(--facilities-ease);
       }
       .facility-specs li + li {
         margin-top: 0.25rem;
+      }
+      .facility-card.is-focused .facility-specs {
+        font-size: 0.88rem;
+      }
+      .facilities-nav {
+        margin-top: -1.25rem;
+        padding-bottom: 0.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+        background: color-mix(in oklab, var(--bd-green) 12%, var(--bd-bg) 88%);
+        padding: 0.6rem 1rem 0.9rem;
+        border-radius: 999px;
+        width: fit-content;
+        margin-inline: auto;
+        box-shadow: 0 14px 30px rgba(18, 42, 28, 0.14);
+      }
+      .facilities-nav button {
+        appearance: none;
+        border: none;
+        background: color-mix(in oklab, var(--bd-green) 42%, var(--bd-bg-elev) 58%);
+        width: 1.9rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background-color 0.25s ease, transform 0.25s ease;
+        position: relative;
+      }
+      .facilities-nav button::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: color-mix(in oklab, var(--bd-green) 65%, var(--bd-ink) 35%);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+      .facilities-nav button:hover::after {
+        opacity: 0.45;
+      }
+      .facilities-nav button.is-active {
+        transform: scale(1.1);
+      }
+      .facilities-nav button.is-active::after {
+        opacity: 1;
+      }
+      .facilities-nav button:focus-visible {
+        outline: 2px solid color-mix(in oklab, var(--bd-green) 45%, var(--bd-ink) 55%);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .facilities-viewport {
+          scroll-behavior: auto;
+        }
+        .facility-card {
+          transition: none;
+        }
+        .facility-card.is-focused {
+          transform: none;
+        }
       }
       .contact-grid {
         margin-top: 2rem;
@@ -340,10 +675,10 @@
       }
       .pub-card {
         background: var(--bd-bg-elev);
-        border: 1px solid var(--bd-border);
+        border: 1px solid color-mix(in oklab, var(--bd-ink) 26%, var(--bd-border) 74%);
         border-radius: calc(var(--radius) - 4px);
         padding: 1.2rem;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow), inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
@@ -351,7 +686,7 @@
       }
       .pub-card:hover {
         transform: translateX(4px);
-        box-shadow: 0 14px 34px rgba(15, 26, 26, 0.14);
+        box-shadow: 0 14px 34px rgba(15, 26, 26, 0.14), inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
       }
       .pub-year {
         display: inline-flex;
@@ -412,10 +747,10 @@
       }
       .person-card {
         background: var(--bd-bg-elev);
-        border: 1px solid var(--bd-border);
+        border: 1px solid color-mix(in oklab, var(--bd-ink) 26%, var(--bd-border) 74%);
         border-radius: calc(var(--radius) - 4px);
         padding: 1.25rem;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow), inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
@@ -487,16 +822,22 @@
         }
         .person-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 14px 34px rgba(15, 26, 26, 0.14);
+          box-shadow: 0 14px 34px rgba(15, 26, 26, 0.14), inset 0 0 0 1px color-mix(in oklab, var(--bd-border) 50%, transparent);
         }
       }
       @media (max-width: 900px) {
         .people-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+        .opportunities-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
       @media (max-width: 560px) {
         .people-grid {
+          grid-template-columns: 1fr;
+        }
+        .opportunities-grid {
           grid-template-columns: 1fr;
         }
       }
@@ -545,22 +886,31 @@
 <body>
   <header class="site-header">
     <div class="container nav" role="navigation" aria-label="Main navigation">
-      <a class="brand" href="#" aria-label="BDtronics Lab, home">
-        <div class="brand-logos">
-          <img class="brand-logo brand-logo-cnr" src="assets/logo_CNR-IMM.png" alt="CNR-IMM logo" />
-        </div>
-        <div class="brand-text">
-          <h1>BDtronics Lab</h1>
-          <span class="tagline">Flexible Sustainable Electronics</span>
-          <span class="brand-affiliation">Research group within CNR-IMM</span>
-        </div>
-      </a>
+      <div class="brand">
+        <a
+          class="brand-logo-link brand-logos"
+          href="https://www.imm.cnr.it/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Visita il sito CNR-IMM"
+        >
+          <img class="brand-logo brand-logo-cnr" src="assets/Logo_CNR-IMM.svg" alt="CNR-IMM logo" />
+        </a>
+        <a class="brand-home" href="#" aria-label="BDtronics Lab, home">
+          <div class="brand-text">
+            <h1>BDtronics Lab</h1>
+            <span class="tagline">Flexible Sustainable Electronics</span>
+            <span class="brand-affiliation">Research group within CNR-IMM</span>
+          </div>
+        </a>
+      </div>
       <nav class="menu" aria-label="Site sections">
         <a href="#news">News</a>
         <a href="#research">Research</a>
         <a href="#team">Team</a>
         <a href="#publications">Publications</a>
         <a href="#facilities">Facilities</a>
+        <a href="#work">Work with us</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>
@@ -596,10 +946,10 @@
         <div class="hero-logo" aria-hidden="true">
           <picture>
             <source
-              srcset="assets/logo-negative.png"
+              srcset="assets/BDtronics-logo-white.svg"
               media="(prefers-color-scheme: dark)"
             />
-            <img src="assets/logo.png" alt="" />
+            <img src="assets/BDtronics-logo-green.svg" alt="" />
           </picture>
         </div>
         </div>
@@ -702,8 +1052,18 @@
         <p class="muted">
           Instrumentation and labs enabling material synthesis, device fabrication, and system validation.
         </p>
-        <div class="facilities-grid" role="list" data-facilities-grid>
-          <p class="muted" data-facilities-loading>Loading facilities...</p>
+        <div class="facilities-carousel" data-facilities-carousel>
+          <div
+            class="facilities-viewport"
+            data-facilities-viewport
+            aria-live="polite"
+            aria-label="Facilities carousel"
+          >
+            <div class="facilities-track" role="list" data-facilities-track>
+              <p class="muted" data-facilities-loading>Loading facilities...</p>
+            </div>
+          </div>
+          <div class="facilities-nav" data-facilities-nav hidden aria-label="Navigazione facilities"></div>
         </div>
         <p class="muted" data-facilities-error hidden>
           We're unable to load the facilities right now. Please try again later.
@@ -711,6 +1071,34 @@
         <noscript>
           <p class="muted">Enable JavaScript to view the facilities lineup.</p>
         </noscript>
+      </section>
+
+      <section id="work" class="container work">
+        <h3>Work with us</h3>
+        <div class="work-callout">
+          <p>
+            <strong>Apply your research to sustainable electronics.</strong> We co-develop master's theses,
+            PhD projects, and post-doctoral fellowships with academic and industrial partners across Europe.
+          </p>
+          <p>
+            Explore our current openings below to discover project themes, expected activities, and how to get in touch.
+          </p>
+        </div>
+        <p class="work-status" data-opportunities-loading aria-live="polite">Loading opportunities...</p>
+        <p class="work-status" data-opportunities-empty hidden aria-live="polite">
+          We are not recruiting at the moment. Check back soon or reach out directly.
+        </p>
+        <p class="work-status" data-opportunities-error hidden aria-live="polite">
+          We couldn't load the open opportunities right now. Please try again later.
+        </p>
+        <div class="opportunities-grid" role="list" data-opportunities-grid></div>
+        <aside class="work-open-call">
+          <h4>Don't see the right fit?</h4>
+          <p>
+            We're always happy to discuss tailored research ideas. Send us a short introduction with your interests and CV at
+            <a href="mailto:info@bdtronicslab.org">info@bdtronicslab.org</a> and we'll get back to you.
+          </p>
+        </aside>
       </section>
 
       <section id="contact" class="container">
@@ -784,6 +1172,7 @@
           <a href="#team">Team</a>
           <a href="#publications">Publications</a>
           <a href="#facilities">Facilities</a>
+          <a href="#work">Work with us</a>
           <a href="#contact">Contact</a>
         </div>`;
       document.querySelector('.site-header')?.appendChild(nav);
@@ -960,6 +1349,260 @@
         });
     }
 
+    const opportunitiesGrid = document.querySelector('[data-opportunities-grid]');
+    const opportunitiesLoading = document.querySelector('[data-opportunities-loading]');
+    const opportunitiesEmpty = document.querySelector('[data-opportunities-empty]');
+    const opportunitiesError = document.querySelector('[data-opportunities-error]');
+
+    const parseOpportunityDate = (value) => {
+      if (value === null || value === undefined) {
+        return null;
+      }
+      const parsed = new Date(value);
+      if (Number.isNaN(parsed.getTime())) {
+        return null;
+      }
+      return parsed;
+    };
+
+    const formatOpportunityDeadline = (value) => {
+      const date = parseOpportunityDate(value);
+      if (!date) {
+        return '';
+      }
+      try {
+        return date.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        });
+      } catch (error) {
+        return '';
+      }
+    };
+
+    const resolveOpportunityEmail = (value) => {
+      const trimmed = typeof value === 'string' ? value.trim() : '';
+      if (trimmed && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(trimmed)) {
+        return trimmed;
+      }
+      return 'info@bdtronicslab.org';
+    };
+
+    const formatDurationMonths = (value) => {
+      if (value === null || value === undefined) {
+        return '';
+      }
+      const numeric = Number(value);
+      if (Number.isFinite(numeric) && numeric > 0) {
+        return `${numeric} month${numeric === 1 ? '' : 's'}`;
+      }
+      if (typeof value === 'string' && value.trim()) {
+        return value.trim();
+      }
+      return '';
+    };
+
+    const createOpportunityCard = (opportunity) => {
+      if (!opportunity || typeof opportunity !== 'object') {
+        return null;
+      }
+      const title = typeof opportunity.title === 'string' ? opportunity.title.trim() : '';
+      if (!title) {
+        return null;
+      }
+      const description =
+        typeof opportunity.description === 'string'
+          ? opportunity.description.trim()
+          : typeof opportunity.summary === 'string'
+          ? opportunity.summary.trim()
+          : '';
+      const typeLabel = typeof opportunity.type === 'string' ? opportunity.type.trim() : '';
+      const durationValue =
+        opportunity.duration !== undefined && opportunity.duration !== null ? opportunity.duration : '';
+      const deadlineValue =
+        opportunity.deadline !== undefined && opportunity.deadline !== null
+          ? opportunity.deadline
+          : opportunity.closing;
+      const locationValue =
+        typeof opportunity.location === 'string' ? opportunity.location.trim() : '';
+      const emailValue =
+        opportunity.email ?? opportunity.contact ?? opportunity.mail ?? opportunity.mailto ?? '';
+
+      const card = document.createElement('article');
+      card.className = 'opportunity-card';
+      card.setAttribute('role', 'listitem');
+
+      if (typeLabel) {
+        const typeEl = document.createElement('span');
+        typeEl.className = 'opportunity-type';
+        typeEl.textContent = typeLabel;
+        card.appendChild(typeEl);
+      }
+
+      const heading = document.createElement('h4');
+      heading.textContent = title;
+      card.appendChild(heading);
+
+      if (description) {
+        const descriptionEl = document.createElement('p');
+        descriptionEl.textContent = description;
+        card.appendChild(descriptionEl);
+      }
+
+      const metaItems = [];
+
+      if (locationValue) {
+        metaItems.push({
+          label: 'Location',
+          content: document.createTextNode(locationValue),
+        });
+      }
+
+      const formattedDuration = formatDurationMonths(durationValue);
+      if (formattedDuration) {
+        metaItems.push({
+          label: 'Duration',
+          content: document.createTextNode(formattedDuration),
+        });
+      }
+
+      const formattedDeadline = formatOpportunityDeadline(deadlineValue);
+      if (formattedDeadline) {
+        metaItems.push({
+          label: 'Deadline',
+          content: document.createTextNode(formattedDeadline),
+        });
+      }
+
+      if (metaItems.length > 0) {
+        const metaList = document.createElement('ul');
+        metaList.className = 'opportunity-meta';
+        metaItems.forEach(({ label, content }) => {
+          const item = document.createElement('li');
+          const labelEl = document.createElement('strong');
+          labelEl.textContent = label;
+          item.appendChild(labelEl);
+          item.appendChild(document.createTextNode(': '));
+          if (content instanceof Node) {
+            item.appendChild(content);
+          } else {
+            const span = document.createElement('span');
+            span.textContent = String(content);
+            item.appendChild(span);
+          }
+          metaList.appendChild(item);
+        });
+        card.appendChild(metaList);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'opportunity-actions';
+      const applyLink = document.createElement('a');
+      applyLink.className = 'opportunity-apply';
+      const recipient = resolveOpportunityEmail(emailValue);
+      const params = new URLSearchParams({
+        subject: `Opportunity enquiry: ${title}`,
+      });
+      applyLink.href = `mailto:${recipient}?${params.toString()}`;
+      applyLink.textContent = 'Apply via email';
+      applyLink.setAttribute('aria-label', `Apply via email for ${title}`);
+      actions.appendChild(applyLink);
+      card.appendChild(actions);
+
+      return card;
+    };
+
+    if (opportunitiesGrid) {
+      if (opportunitiesEmpty) {
+        opportunitiesEmpty.hidden = true;
+      }
+      if (opportunitiesError) {
+        opportunitiesError.hidden = true;
+      }
+      fetch('data/opportunities.json')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch opportunities data');
+          }
+          return response.json();
+        })
+        .then((opportunities) => {
+          if (opportunitiesLoading) {
+            opportunitiesLoading.remove();
+          }
+          if (opportunitiesError) {
+            opportunitiesError.hidden = true;
+          }
+          opportunitiesGrid.innerHTML = '';
+
+          if (!Array.isArray(opportunities) || opportunities.length === 0) {
+            if (opportunitiesEmpty) {
+              opportunitiesEmpty.hidden = false;
+            }
+            return;
+          }
+
+          const normalised = opportunities
+            .map((opportunity) => {
+              const deadline = opportunity?.deadline ?? opportunity?.closing ?? null;
+              return {
+                raw: opportunity,
+                deadlineDate: parseOpportunityDate(deadline),
+              };
+            })
+            .filter(({ raw }) => raw && typeof raw.title === 'string' && raw.title.trim().length > 0)
+            .sort((a, b) => {
+              const aHasDeadline = Boolean(a.deadlineDate);
+              const bHasDeadline = Boolean(b.deadlineDate);
+              if (aHasDeadline && bHasDeadline) {
+                return a.deadlineDate - b.deadlineDate;
+              }
+              if (aHasDeadline) {
+                return -1;
+              }
+              if (bHasDeadline) {
+                return 1;
+              }
+              const titleA = String(a.raw.title || '').toLowerCase();
+              const titleB = String(b.raw.title || '').toLowerCase();
+              return titleA.localeCompare(titleB);
+            });
+
+          if (normalised.length === 0) {
+            if (opportunitiesEmpty) {
+              opportunitiesEmpty.hidden = false;
+            }
+            return;
+          }
+
+          const fragment = document.createDocumentFragment();
+          normalised.forEach(({ raw }) => {
+            const card = createOpportunityCard(raw);
+            if (card) {
+              fragment.appendChild(card);
+            }
+          });
+
+          if (fragment.childElementCount === 0) {
+            if (opportunitiesEmpty) {
+              opportunitiesEmpty.hidden = false;
+            }
+            return;
+          }
+
+          opportunitiesGrid.appendChild(fragment);
+        })
+        .catch(() => {
+          if (opportunitiesLoading) {
+            opportunitiesLoading.remove();
+          }
+          if (opportunitiesError) {
+            opportunitiesError.hidden = false;
+          }
+        });
+    }
+
     const publicationsTimeline = document.querySelector('[data-publications-timeline]');
     const publicationsLoading = publicationsTimeline?.querySelector('[data-publications-loading]');
     const publicationsError = document.querySelector('[data-publications-error]');
@@ -1075,10 +1718,133 @@
         });
     }
 
-    const facilitiesGrid = document.querySelector('[data-facilities-grid]');
-    const facilitiesLoading = facilitiesGrid?.querySelector('[data-facilities-loading]');
+    const facilitiesViewport = document.querySelector('[data-facilities-viewport]');
+    const facilitiesTrack = document.querySelector('[data-facilities-track]');
+    const facilitiesNav = document.querySelector('[data-facilities-nav]');
+    const facilitiesLoading = facilitiesTrack?.querySelector('[data-facilities-loading]');
     const facilitiesError = document.querySelector('[data-facilities-error]');
-    if (facilitiesGrid) {
+    let activeFacilityCard = null;
+    let facilityFocusRaf = null;
+    let isProgrammaticFacilityScroll = false;
+    let facilityResizeTimeout;
+    let facilityNavButtons = [];
+
+    if (facilitiesNav) {
+      facilitiesNav.hidden = true;
+    }
+
+    const updateFacilityNavState = (card) => {
+      if (!facilitiesNav || facilityNavButtons.length === 0) {
+        return;
+      }
+      const activeIndex = Number(card?.dataset?.navIndex);
+      facilityNavButtons.forEach((button, index) => {
+        const isActive = index === activeIndex;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    };
+
+    const setActiveFacilityCard = (card) => {
+      if (activeFacilityCard === card) {
+        return;
+      }
+      if (activeFacilityCard) {
+        activeFacilityCard.classList.remove('is-focused');
+      }
+      activeFacilityCard = card || null;
+      if (activeFacilityCard) {
+        activeFacilityCard.classList.add('is-focused');
+      }
+      updateFacilityNavState(activeFacilityCard);
+    };
+
+    const requestFacilityFocusUpdate = () => {
+      if (facilityFocusRaf !== null) {
+        return;
+      }
+      facilityFocusRaf = requestAnimationFrame(() => {
+        facilityFocusRaf = null;
+        updateFacilityFocus();
+      });
+    };
+
+    const centerFacilityCard = (card, { smooth = false } = {}) => {
+      if (!facilitiesViewport || !card) {
+        return;
+      }
+      const cardWidth = card.offsetWidth;
+      if (!cardWidth) {
+        return;
+      }
+      const target =
+        card.offsetLeft - (facilitiesViewport.clientWidth - cardWidth) / 2;
+      isProgrammaticFacilityScroll = true;
+      facilitiesViewport.scrollTo({
+        left: Math.max(0, target),
+        behavior: smooth ? 'smooth' : 'auto',
+      });
+      setActiveFacilityCard(card);
+      if (smooth) {
+        window.setTimeout(() => {
+          isProgrammaticFacilityScroll = false;
+          requestFacilityFocusUpdate();
+        }, 380);
+      } else {
+        requestAnimationFrame(() => {
+          isProgrammaticFacilityScroll = false;
+          requestFacilityFocusUpdate();
+        });
+      }
+    };
+
+    const updateFacilityFocus = () => {
+      if (!facilitiesViewport || !facilitiesTrack) {
+        return;
+      }
+      const cards = facilitiesTrack.querySelectorAll('[data-facility-card]');
+      if (cards.length === 0) {
+        return;
+      }
+      const viewportRect = facilitiesViewport.getBoundingClientRect();
+      const viewportCenter = viewportRect.left + viewportRect.width / 2;
+      let bestCard = null;
+      let bestDistance = Number.POSITIVE_INFINITY;
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestCard = card;
+        }
+      });
+      if (!bestCard) {
+        return;
+      }
+      setActiveFacilityCard(bestCard);
+    };
+
+    const handleFacilityScroll = () => {
+      if (isProgrammaticFacilityScroll) {
+        return;
+      }
+      requestFacilityFocusUpdate();
+    };
+
+    const scheduleFacilityResize = () => {
+      if (!activeFacilityCard) {
+        return;
+      }
+      if (facilityResizeTimeout) {
+        window.clearTimeout(facilityResizeTimeout);
+      }
+      facilityResizeTimeout = window.setTimeout(() => {
+        centerFacilityCard(activeFacilityCard);
+      }, 180);
+    };
+
+    if (facilitiesViewport && facilitiesTrack) {
       fetch('data/facilities.json')
         .then((response) => {
           if (!response.ok) {
@@ -1090,28 +1856,28 @@
           if (!Array.isArray(facilities) || facilities.length === 0) {
             throw new Error('Facilities data is empty');
           }
-          facilitiesGrid.innerHTML = '';
-          const fragment = document.createDocumentFragment();
+          facilitiesTrack.innerHTML = '';
 
-          facilities.forEach((facility) => {
+          const resolveAssetPath = (value) => {
+            if (typeof value !== 'string' || !value.trim()) {
+              return '';
+            }
+            const trimmed = value.trim();
+            if (/^https?:\/\//i.test(trimmed)) {
+              return trimmed;
+            }
+            return `assets/facilities/${trimmed}`;
+          };
+
+          const createFacilityCard = (facility, index) => {
             const card = document.createElement('article');
             card.className = 'facility-card';
+            card.dataset.facilityCard = 'true';
+            card.dataset.navIndex = String(index);
             card.setAttribute('role', 'listitem');
 
             const mediaWrapper = document.createElement('div');
             mediaWrapper.className = 'facility-media';
-
-            const resolveAssetPath = (value) => {
-              if (typeof value !== 'string' || !value.trim()) {
-                return '';
-              }
-              const trimmed = value.trim();
-              if (/^https?:\/\//i.test(trimmed)) {
-                return trimmed;
-              }
-              return `assets/facilities/${trimmed}`;
-            };
-
             let mediaAdded = false;
             const videoPath = resolveAssetPath(facility.video);
             const posterPath = resolveAssetPath(facility.poster);
@@ -1165,16 +1931,12 @@
             const content = document.createElement('div');
             content.className = 'facility-content';
 
+            const heading = document.createElement('div');
+            heading.className = 'facility-heading';
+
             const title = document.createElement('h4');
             title.textContent = facility.name || 'Facility';
-            content.appendChild(title);
-
-            if (facility.description) {
-              const description = document.createElement('p');
-              description.className = 'muted';
-              description.textContent = facility.description;
-              content.appendChild(description);
-            }
+            heading.appendChild(title);
 
             if (Array.isArray(facility.capabilities) && facility.capabilities.length > 0) {
               const capabilities = document.createElement('div');
@@ -1185,7 +1947,19 @@
                 cap.textContent = capability;
                 capabilities.appendChild(cap);
               });
-              content.appendChild(capabilities);
+              heading.appendChild(capabilities);
+            }
+
+            content.appendChild(heading);
+
+            const body = document.createElement('div');
+            body.className = 'facility-body';
+
+            if (facility.description) {
+              const description = document.createElement('p');
+              description.className = 'muted';
+              description.textContent = facility.description;
+              body.appendChild(description);
             }
 
             if (Array.isArray(facility.specs) && facility.specs.length > 0) {
@@ -1196,22 +1970,82 @@
                 specItem.textContent = spec;
                 specsList.appendChild(specItem);
               });
-              content.appendChild(specsList);
+              body.appendChild(specsList);
+            }
+
+            if (body.children.length > 0) {
+              content.appendChild(body);
             }
 
             card.appendChild(content);
-            fragment.appendChild(card);
+            return card;
+          };
+
+          const fragment = document.createDocumentFragment();
+          const realCards = [];
+
+          facilities.forEach((facility, index) => {
+            const card = createFacilityCard(facility, index);
+            if (card) {
+              realCards.push(card);
+              fragment.appendChild(card);
+            }
           });
 
-          facilitiesGrid.appendChild(fragment);
+          facilitiesTrack.appendChild(fragment);
 
-          facilitiesGrid
+          if (facilitiesNav) {
+            facilitiesNav.innerHTML = '';
+            facilityNavButtons = [];
+            if (realCards.length > 1) {
+              facilitiesNav.hidden = false;
+              const navFragment = document.createDocumentFragment();
+              realCards.forEach((card, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.setAttribute('aria-pressed', 'false');
+                button.setAttribute(
+                  'aria-label',
+                  `Vai alla facility ${card.querySelector('h4')?.textContent || index + 1}`
+                );
+                button.addEventListener('click', () => {
+                  centerFacilityCard(card, { smooth: true });
+                });
+                navFragment.appendChild(button);
+                facilityNavButtons.push(button);
+              });
+              facilitiesNav.appendChild(navFragment);
+            } else {
+              facilitiesNav.hidden = true;
+            }
+          }
+
+          if (realCards.length > 0) {
+            requestAnimationFrame(() => {
+              const initialIndex = realCards.length >= 2 ? 1 : 0;
+              const initialCard = realCards[initialIndex];
+              if (initialCard) {
+                centerFacilityCard(initialCard);
+                setActiveFacilityCard(initialCard);
+                requestFacilityFocusUpdate();
+              }
+            });
+          }
+
+          facilitiesViewport.addEventListener('scroll', handleFacilityScroll, { passive: true });
+          window.addEventListener('resize', scheduleFacilityResize);
+
+          facilitiesTrack
             .querySelectorAll('[data-facility-video]')
             .forEach((video) => observeFacilityVideo(video));
         })
         .catch(() => {
           if (facilitiesError) {
             facilitiesError.hidden = false;
+          }
+          if (facilitiesNav) {
+            facilitiesNav.hidden = true;
+            facilitiesNav.innerHTML = '';
           }
         })
         .finally(() => {

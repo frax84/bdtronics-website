@@ -2,11 +2,15 @@
   {
     "name": "Materials Synthesis Lab",
     "description": "Glove boxes, spin coaters, and thermal ovens for polymer formulation and biodegradable thin films.",
-    "capabilities": ["polymer casting", "thin-film deposition", "thermal curing"],
+    "capabilities": [
+      "polymer casting",
+      "thin-film deposition",
+      "thermal curing"
+    ],
     "specs": [
       "Glove box O2/H2O < 0.1 ppm",
       "Spin coating up to 8000 rpm",
-      "Programmable bake plates 30–250 °C"
+      "Programmable bake plates 30-250 degC"
     ],
     "video": "materials_synthesis.mp4",
     "poster": "materials_synthesis.jpg"
@@ -16,8 +20,32 @@
     "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
     "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
     "specs": [
-      "Drop volume 3–10 pL",
-      "Alignment accuracy ±15 µm",
+      "Drop volume 3-10 pL",
+      "Alignment accuracy +/-15 um",
+      "Substrate size up to A3"
+    ],
+    "video": "microfab_suite.mp4",
+    "poster": "microfab_suite.jpg"
+  },
+  {
+    "name": "Print & Microfabrication Suite",
+    "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
+    "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
+    "specs": [
+      "Drop volume 3-10 pL",
+      "Alignment accuracy +/-15 um",
+      "Substrate size up to A3"
+    ],
+    "video": "microfab_suite.mp4",
+    "poster": "microfab_suite.jpg"
+  },
+  {
+    "name": "Print & Microfabrication Suite",
+    "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
+    "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
+    "specs": [
+      "Drop volume 3-10 pL",
+      "Alignment accuracy +/-15 um",
       "Substrate size up to A3"
     ],
     "video": "microfab_suite.mp4",
@@ -26,10 +54,14 @@
   {
     "name": "Characterization & Test Lab",
     "description": "Electrical probing, environmental cycling, and mechanical reliability rigs for transient electronics.",
-    "capabilities": ["electrical test", "environmental cycling", "mechanical reliability"],
+    "capabilities": [
+      "electrical test",
+      "environmental cycling",
+      "mechanical reliability"
+    ],
     "specs": [
-      "Probe stations up to 6″ wafers",
-      "Humidity chambers 10–95 %RH",
+      "Probe stations up to 6 inch wafers",
+      "Humidity chambers 10-95 %RH",
       "Dynamic bending radius down to 5 mm"
     ],
     "video": "characterization_lab.mp4",
