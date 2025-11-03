@@ -1,0 +1,108 @@
+[
+  {
+    "title": "Diverging paths to green innovation: Genetic and chemical routes to next-gen bioplastics",
+    "year": 2025,
+    "venue": "Matter ",
+    "type": "journal",
+    "authors": [
+      "Elena Palmieri",
+      "Luca Maiolo",
+	  "Francesco Maita"
+    ],
+    "summary": "Describes two promising strategies for a more sustainable synthesis of bioplastics ",
+    "links": [
+      { "label": "DOI", "url": "https://doi.org/10.1016/j.matt.2025.102202" }
+    ]
+  },
+  {
+    "title": "A cellulose based biodegradable humidity sensor with embedded salts for crop monitoring and nutrient supply in space greenhouses",
+    "year": 2025,
+    "venue": "IEEE 12th International Workshop on Metrology for AeroSpace",
+    "type": "conference",
+    "authors": [
+      "Elena Palmieri",
+      "Francesco Maita",
+      "Ivano Lucarini",
+	  "Luca Montaina",
+	  "Antonio Minotti",
+	  "Luca Maiolo"
+    ],
+    "summary": "Introduces a multifunctional biodegradable humidity sensor for greenhouse and space applications",
+    "links": [
+      { "label": "DOI", "url": "https://doi.org/10.1109/MetroAeroSpace64938.2025.11114709" }
+    ]
+  },
+  {
+    "title": "Sustainable Space Agriculture: Biodegradable Sensors Redefining Greenhouse Monitoring Beyond Earth",
+    "year": 2024,
+    "venue": "IEEE 11th International Workshop on Metrology for AeroSpace",
+    "type": "conference",
+    "authors": [
+      "Elena Palmieri",
+	    "Francesco Maita",
+	  "Ivano Lucarini",
+	  "Jose Ignacio Del Rio De Vicente",
+    "Antonio Minotti",
+    "Luca Maiolo"
+    ],
+    "summary": "Presents a biodegradable humidity sensor for space applications.",
+    "links": [
+      { "label": "Proceedings", "url": "https://doi.org/10.1109/MetroAeroSpace61015.2024.10591520" }
+    ]
+  },
+  {
+    "title": "An ethyl cellulose novel biodegradable flexible substrate material for sustainable screen-printing",
+    "year": 2024,
+    "venue": "RSC advances",
+    "type": "journal",
+    "authors": [
+      "Elena Palmieri",
+	  "Rocco Cancelliere",
+	  "Francesco Maita",
+	  "Laura Micheli",
+      "Luca Maiolo"
+    ],
+    "summary": "Introduces an innovative solution to reduce plastic dependence in flexible electronics: a biodegradable, water-resistant, and flexible cellulose-based substrate for crafting electrochemical printed platforms",
+    "links": [
+      { "label": "Proceedings", "url": "https://doi.org/10.1039/D4RA02993C" }
+    ]
+  },
+  {
+    "title": "Toward Sustainable Electronics: Exploiting the Potential of a Biodegradable Cellulose Blend for Photolithographic Processes and Eco‐Friendly Devices",
+    "year": 2024,
+    "venue": "Advanced Materials Technologies",
+    "type": "journal",
+    "authors": [
+      "Elena Palmieri",
+	  "Luca Maiolo",
+	  "Ivano Lucarini",
+	  "Adriano Diaz Fattorini",
+	  "Emanuela Tamburri",
+	  "Silvia Orlanducci",
+	  "Raffaella Calarco",
+      "Francesco Maita"      
+    ],
+    "summary": "Presents a biodegradable cellulose-based material that allow device microfabrication with standard thin film technologies methods.",
+    "links": [
+      { "label": "Proceedings", "url": "https://doi.org/10.1002/admt.202301282" }
+    ]
+  },
+  {
+    "title": "Revolutionizing Precision Agriculture: Exploring a Novel biodegradable Substrate for Advanced Electronic Sensors",
+    "year": 2023,
+    "venue": "IEEE 10th International Workshop on Metrology for AeroSpace",
+    "type": "conference",
+    "authors": [
+      "Elena Palmieri",
+	  "Francesco Maita",
+	  "Alessandra Pellegrino",
+	  "Giovanni Avola",
+    "Miriam Distefano",
+    "Luca Maiolo"
+    ],
+    "summary": "Presents cellulose-based transparent substrates for wrapping plant leaves in precision agriculture applications .",
+    "links": [
+      { "label": "Proceedings", "url": "https://doi.org/10.1109/MetroAgriFor58484.2023.10424390" }
+    ]
+  }
+]
