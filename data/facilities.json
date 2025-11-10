@@ -1,43 +1,67 @@
 [
   {
-    "name": "Materials Synthesis Lab",
-    "description": "Glove boxes, spin coaters, and thermal ovens for polymer formulation and biodegradable thin films.",
+    "name": "TA Instruments HR20",
+    "description": "A multi-purpose hybrid rheometer for advanced material characterization including shear and normal force control, oscillatory and steady flow tests",
     "capabilities": [
-      "polymer casting",
-      "thin-film deposition",
-      "thermal curing"
+      "rheology",
+      "viscoelastic property measurements",
+      "extensive accessory support"
     ],
     "specs": [
-      "Glove box O2/H2O < 0.1 ppm",
-      "Spin coating up to 8000 rpm",
-      "Programmable bake plates 30-250 degC"
+      "Minimum torque: 1 mN·m (oscillatory) and ~3 mN·m (steady shear)",
+      "Frequency range: 1 x 10⁻⁷ Hz up to ~100 Hz",
+      "Force range: -50 N to +50 N sensitivity ~0.005 N in advertised setups",
+      "Versatile sample handling: liquids, soft solids, solids"
     ],
-    "video": "materials_synthesis.mp4",
-    "poster": "materials_synthesis.jpg"
+    "video": "HR20.mp4",
+    "poster": "HR20.jpg"
   },
   {
-    "name": "Print & Microfabrication Suite",
-    "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
-    "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
-    "specs": [
-      "Drop volume 3-10 pL",
-      "Alignment accuracy +/-15 um",
-      "Substrate size up to A3"
+    "name": "TA Instruments TGA-55",
+    "description": "A research-grade thermogravimetric analyzer for precise mass-change measurements as a function of temperature and atmosphere.",
+    "capabilities": [
+      "thermogravimetry",
+      "high sensitivity/accuracy",
+      "atmospheric control options"
     ],
-    "video": "microfab_suite.mp4",
-    "poster": "microfab_suite.jpg"
+    "specs": [
+      "Ambient to ~400 °C temperature range",
+      "Sensitivity: mass change detection down to 0.01 µg",
+      "Core balance: TA-Instruments Tru-Mass™ system "
+    ],
+    "video": "TGA55.mp4",
+    "poster": "TGA55.jpg"
   },
   {
-    "name": "Print & Microfabrication Suite",
-    "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
-    "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
-    "specs": [
-      "Drop volume 3-10 pL",
-      "Alignment accuracy +/-15 um",
-      "Substrate size up to A3"
+    "name": "Linari Nanotech All-in-One",
+    "description": "A modular electrospinning system designed for the production of nanofibers, scaffolds and coatings.",
+    "capabilities": [
+      "electrospinning of nanofibres",
+      "single-needle, multi-needle, coaxial",
+      "scalable"
     ],
-    "video": "microfab_suite.mp4",
-    "poster": "microfab_suite.jpg"
+    "specs": [
+      "Generator voltage range: 0 to 40 kV DC and 0 to -40 kV DC",
+      "Plate or drum collectors for aligned or random fibre mats",
+      "Syringe pump with flow rates from 0.1 to 50 ml/h"
+    ],
+    "video": "All-in-one.mp4",
+    "poster": "All-in-one.jpg"
+  },
+    {
+    "name": "Voltera NOVA",
+    "description": "A materials-dispensing platform for prototyping flexible hybrid electronics (FHE).",
+    "capabilities": [
+      "direct ink-write (DIW) dispensing",
+      "works with flexible, stretchable, conformable and rigid substrates"
+    ],
+    "specs": [
+      "Print area: 220 x 300 mm",
+      "Trace width capability: down to ~100 µm",
+      "Substrate compatibility: rigid (FR1/FR4, silicon wafers) and flexible/stretchable/biocompatible materials"
+    ],
+    "video": "Nova.mp4",
+    "poster": "Nova.jpg"
   },
 {
   "name": "Voltera V-One",
@@ -55,22 +79,21 @@
   ],
   "video": "V-One.mp4",
   "poster": "V-One.jpg"
+},
+{
+  "name": "Formlabs Form 4B",
+  "description": "A high-performance SLA 3D printer built for medical applications offering biocompatible and sterilizable materials with precision and reliability.",
+  "capabilities": [
+    "stereolithography (SLA) resin printing",
+    "biocompatible & sterilizable parts production"
+  ],
+  "specs": [
+    "Build volume: 200 x 125 x 210 mm",
+    "XY resolution: ~50 µm pixel size",
+    "Layer thickness: 25-300 µm",
+    "Print speed: up to ~80 mm/h"
+  ],
+  "video": "Form4B.mp4",
+  "poster": "Form4B.jpg"
 }
-,
-  {
-    "name": "NOVA V-One microdispensing system",
-    "description": "Electrical probing, environmental cycling, and mechanical reliability rigs for transient electronics.",
-    "capabilities": [
-      "electrical test",
-      "environmental cycling",
-      "mechanical reliability"
-    ],
-    "specs": [
-      "Probe stations up to 6 inch wafers",
-      "Humidity chambers 10-95 %RH",
-      "Dynamic bending radius down to 5 mm"
-    ],
-    "video": "V-One.mp4",
-    "poster": "characterization_lab.jpg"
-  }
 ]

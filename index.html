@@ -511,10 +511,28 @@
       }
       .facility-media video,
       .facility-media img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
+      }
+      .facility-media .facility-video,
+      .facility-media .facility-poster {
+        transition: opacity 0.4s var(--facilities-ease), visibility 0.4s var(--facilities-ease);
+      }
+      .facility-media[data-has-poster='true'] .facility-video {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .facility-card.is-focused .facility-media[data-has-poster='true'] .facility-video {
+        opacity: 1;
+        visibility: visible;
+      }
+      .facility-card.is-focused .facility-media[data-has-poster='true'] .facility-poster {
+        opacity: 0;
+        visibility: hidden;
       }
       .facility-content {
         display: flex;
@@ -1240,19 +1258,22 @@
     // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    const prepareFacilityVideoSource = (video) => {
+      if (!video || video.src) {
+        return;
+      }
+      const src = video.dataset.src;
+      if (src) {
+        video.src = src;
+        video.load();
+      }
+    };
+
     const startFacilityVideoPlayback = (video) => {
       if (!video) {
         return;
       }
-      const src = video.dataset.src;
-      let shouldLoad = false;
-      if (src && !video.src) {
-        video.src = src;
-        shouldLoad = true;
-      }
-      if (shouldLoad) {
-        video.load();
-      }
+      prepareFacilityVideoSource(video);
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(() => {});
@@ -1269,6 +1290,11 @@
     };
 
     let facilityVideoObserver;
+    const isVideoInFocusedFacilityCard = (video) => {
+      const card = video?.closest('[data-facility-card]');
+      return Boolean(card && card.classList.contains('is-focused'));
+    };
+
     const observeFacilityVideo = (video) => {
       if (!video) {
         return;
@@ -1280,7 +1306,12 @@
               entries.forEach((entry) => {
                 const targetVideo = entry.target;
                 if (entry.isIntersecting) {
-                  startFacilityVideoPlayback(targetVideo);
+                  prepareFacilityVideoSource(targetVideo);
+                  if (isVideoInFocusedFacilityCard(targetVideo)) {
+                    startFacilityVideoPlayback(targetVideo);
+                  } else {
+                    pauseFacilityVideoPlayback(targetVideo);
+                  }
                 } else {
                   pauseFacilityVideoPlayback(targetVideo);
                 }
@@ -1291,7 +1322,12 @@
         }
         facilityVideoObserver.observe(video);
       } else {
-        startFacilityVideoPlayback(video);
+        prepareFacilityVideoSource(video);
+        if (isVideoInFocusedFacilityCard(video)) {
+          startFacilityVideoPlayback(video);
+        } else {
+          pauseFacilityVideoPlayback(video);
+        }
       }
     };
 
@@ -1900,16 +1936,33 @@
       });
     };
 
+    const updateFacilityCardMediaState = (card, isActive) => {
+      if (!card) {
+        return;
+      }
+      const video = card.querySelector('[data-facility-video]');
+      if (!video) {
+        return;
+      }
+      if (isActive) {
+        startFacilityVideoPlayback(video);
+      } else {
+        pauseFacilityVideoPlayback(video);
+      }
+    };
+
     const setActiveFacilityCard = (card) => {
       if (activeFacilityCard === card) {
         return;
       }
       if (activeFacilityCard) {
+        updateFacilityCardMediaState(activeFacilityCard, false);
         activeFacilityCard.classList.remove('is-focused');
       }
       activeFacilityCard = card || null;
       if (activeFacilityCard) {
         activeFacilityCard.classList.add('is-focused');
+        updateFacilityCardMediaState(activeFacilityCard, true);
         const index = Number(activeFacilityCard.dataset?.facilityIndex);
         if (!Number.isNaN(index)) {
           currentFacilityIndex = index;
@@ -2141,8 +2194,30 @@
             let mediaAdded = false;
             const videoPath = resolveAssetPath(facility.video);
             const posterPath = resolveAssetPath(facility.poster);
+            const hasVideo = Boolean(videoPath);
+            const hasPoster = Boolean(posterPath);
+            const canTogglePoster = hasVideo && hasPoster;
 
-            if (videoPath) {
+            if (canTogglePoster) {
+              mediaWrapper.dataset.hasPoster = 'true';
+            }
+
+            if (hasPoster) {
+              const posterImg = document.createElement('img');
+              posterImg.className = 'facility-poster';
+              posterImg.src = posterPath;
+              posterImg.loading = 'lazy';
+              if (canTogglePoster) {
+                posterImg.alt = '';
+                posterImg.setAttribute('aria-hidden', 'true');
+              } else {
+                posterImg.alt = facility.name || 'Facility';
+              }
+              mediaWrapper.appendChild(posterImg);
+              mediaAdded = true;
+            }
+
+            if (hasVideo) {
               const video = document.createElement('video');
               video.className = 'facility-video';
               video.muted = true;
@@ -2163,24 +2238,27 @@
               video.addEventListener(
                 'error',
                 () => {
+                  if (hasPoster) {
+                    if (facilityVideoObserver) {
+                      facilityVideoObserver.unobserve(video);
+                    }
+                    video.remove();
+                    delete mediaWrapper.dataset.hasPoster;
+                    return;
+                  }
                   if (posterPath) {
                     const fallbackImage = document.createElement('img');
                     fallbackImage.src = posterPath;
                     fallbackImage.alt = facility.name || 'Facility media';
                     fallbackImage.loading = 'lazy';
                     mediaWrapper.replaceChildren(fallbackImage);
+                  } else {
+                    video.remove();
                   }
                 },
                 { once: true }
               );
               mediaWrapper.appendChild(video);
-              mediaAdded = true;
-            } else if (posterPath) {
-              const img = document.createElement('img');
-              img.src = posterPath;
-              img.alt = facility.name || 'Facility';
-              img.loading = 'lazy';
-              mediaWrapper.appendChild(img);
               mediaAdded = true;
             }
 
