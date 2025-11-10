@@ -39,18 +39,24 @@
     "video": "microfab_suite.mp4",
     "poster": "microfab_suite.jpg"
   },
-  {
-    "name": "V-One microdispensing system",
-    "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
-    "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
-    "specs": [
-      "Drop volume 3-10 pL",
-      "Alignment accuracy +/-15 um",
-      "Substrate size up to A3"
-    ],
-    "video": "microfab_suite.mp4",
-    "poster": "microfab_suite.jpg"
-  },
+{
+  "name": "Voltera V-One",
+  "description": "Desktop direct-write dispensing system for prototyping printed circuit boards: prints conductive ink traces, drills vias/holes, dispenses solder paste and reflows components on a heated bed.",
+  "capabilities": [
+    "conductive ink printing",
+    "drilling vias/holes",
+    "heated bed reflow/cure"
+  ],
+  "specs": [
+    "Minimum trace width 0.2 mm",
+    "Print area (W x D x H) 128 x 116 x 3 mm",
+    "XYZ resolution ~10 µm x 10 µm x 1 µm",
+    "Max heated bed temperature 240 °C"
+  ],
+  "video": "V-One.mp4",
+  "poster": "V-One.jpg"
+}
+,
   {
     "name": "NOVA V-One microdispensing system",
     "description": "Electrical probing, environmental cycling, and mechanical reliability rigs for transient electronics.",
