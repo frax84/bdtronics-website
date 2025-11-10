@@ -37,6 +37,7 @@
       --facilities-peek: clamp(2rem, 12vw, 6rem);
       --facility-card-width: clamp(260px, 28vw, 320px);
       --facility-card-focus-scale: 1.05;
+      --facilities-arrow-width: clamp(2.4rem, 4vw, 3rem);
       --facilities-ease: cubic-bezier(0.16, 0.75, 0.25, 1);
     }
     /* Dark mode: automatic if the user prefers dark colors */
@@ -376,25 +377,74 @@
       .facilities-carousel {
         margin-top: 2rem;
         position: relative;
+        display: grid;
+        align-items: stretch;
       }
       .facilities-viewport {
         overflow-x: auto;
         overflow-y: visible;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding-block: 1rem 2.75rem;
+        padding-block: 1.25rem;
         scroll-padding-inline: calc((100% - var(--facility-card-width)) / 2 + var(--facilities-gap) / 2);
+        scrollbar-width: none;
+        mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
       }
       .facilities-viewport::-webkit-scrollbar {
-        height: 10px;
+        display: none;
       }
-      .facilities-viewport::-webkit-scrollbar-track {
-        background: color-mix(in oklab, var(--bd-border) 18%, transparent);
-        border-radius: 999px;
+      .facilities-arrow {
+        --arrow-anchor: 0;
+        position: absolute;
+        top: 1.25rem;
+        bottom: 1.25rem;
+        width: var(--facilities-arrow-width);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: calc(var(--radius) - 6px);
+        border: 1px solid color-mix(in oklab, var(--bd-green) 22%, transparent);
+        background: color-mix(in oklab, var(--bd-green) 18%, var(--bd-bg-elev) 82%);
+        color: color-mix(in oklab, var(--bd-ink) 90%, white 10%);
+        box-shadow: 0 16px 34px rgba(18, 36, 24, 0.16);
+        cursor: pointer;
+        transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        z-index: 4;
+        transform: translateX(var(--arrow-anchor));
       }
-      .facilities-viewport::-webkit-scrollbar-thumb {
-        background: color-mix(in oklab, var(--bd-ink) 20%, transparent);
-        border-radius: 999px;
+      .facilities-arrow span {
+        font-size: 1.65rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .facilities-arrow.is-prev {
+        left: calc(var(--facilities-peek) * 0.1);
+        --arrow-anchor: calc(-50% - var(--facilities-gap) / 4);
+      }
+      .facilities-arrow.is-next {
+        right: calc(var(--facilities-peek) * 0.1);
+        --arrow-anchor: calc(50% + var(--facilities-gap) / 4);
+      }
+      .facilities-arrow:focus-visible {
+        outline: 2px solid color-mix(in oklab, var(--bd-green) 45%, var(--bd-ink) 55%);
+        outline-offset: 3px;
+      }
+      .facilities-arrow:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+        box-shadow: 0 8px 16px rgba(12, 24, 18, 0.12);
+        background: color-mix(in oklab, var(--bd-green) 12%, var(--bd-bg-elev) 88%);
+        color: color-mix(in oklab, var(--bd-ink) 72%, white 28%);
+      }
+      .facilities-arrow:disabled:hover {
+        transform: translateX(var(--arrow-anchor));
+      }
+      .facilities-arrow:hover {
+        background: color-mix(in oklab, var(--bd-green) 28%, var(--bd-bg-elev) 72%);
+        color: color-mix(in oklab, var(--bd-ink) 95%, white 5%);
+        transform: translateX(var(--arrow-anchor)) scale(1.02);
+        box-shadow: 0 22px 40px rgba(14, 30, 20, 0.18);
       }
       .facilities-track {
         display: flex;
@@ -526,54 +576,34 @@
       .facility-card.is-focused .facility-specs {
         font-size: 0.88rem;
       }
-      .facilities-nav {
-        margin-top: -1.25rem;
-        padding-bottom: 0.75rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.6rem;
-        background: color-mix(in oklab, var(--bd-green) 12%, var(--bd-bg) 88%);
-        padding: 0.6rem 1rem 0.9rem;
-        border-radius: 999px;
-        width: fit-content;
-        margin-inline: auto;
-        box-shadow: 0 14px 30px rgba(18, 42, 28, 0.14);
+      @media (max-width: 900px) {
+        .facilities-arrow {
+          top: 1rem;
+          bottom: 1rem;
+          width: clamp(2.1rem, 6vw, 2.6rem);
+          box-shadow: 0 14px 30px rgba(18, 36, 24, 0.15);
+        }
+        .facilities-arrow span {
+          font-size: 1.45rem;
+        }
       }
-      .facilities-nav button {
-        appearance: none;
-        border: none;
-        background: color-mix(in oklab, var(--bd-green) 42%, var(--bd-bg-elev) 58%);
-        width: 1.9rem;
-        height: 0.42rem;
-        border-radius: 999px;
-        cursor: pointer;
-        transition: background-color 0.25s ease, transform 0.25s ease;
-        position: relative;
+      @media (max-width: 620px) {
+        .facilities-arrow {
+          top: 0.75rem;
+          bottom: 0.75rem;
+          --arrow-anchor: 0;
+          background: color-mix(in oklab, var(--bd-green) 24%, var(--bd-bg-elev) 76%);
+        }
+        .facilities-arrow.is-prev {
+          left: 0.35rem;
+        }
+        .facilities-arrow.is-next {
+          right: 0.35rem;
+        }
+        .facilities-arrow:hover {
+          transform: scale(1.02);
+        }
       }
-      .facilities-nav button::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: color-mix(in oklab, var(--bd-green) 65%, var(--bd-ink) 35%);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-      }
-      .facilities-nav button:hover::after {
-        opacity: 0.45;
-      }
-      .facilities-nav button.is-active {
-        transform: scale(1.1);
-      }
-      .facilities-nav button.is-active::after {
-        opacity: 1;
-      }
-      .facilities-nav button:focus-visible {
-        outline: 2px solid color-mix(in oklab, var(--bd-green) 45%, var(--bd-ink) 55%);
-        outline-offset: 3px;
-      }
-
       @media (prefers-reduced-motion: reduce) {
         .facilities-viewport {
           scroll-behavior: auto;
@@ -639,7 +669,7 @@
         justify-content: center;
       }
       .contact-media img {
-        width: 65%;
+        width: 90%;
         height: auto;
         object-fit: cover;
         display: block;
@@ -723,7 +753,15 @@
         gap: 0.6rem;
         margin-top: 0.4rem;
       }
-      .pub-link {
+      .news-feed {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.25rem;
+      }
+      .news-feed .card {
+        margin: 0;
+      }
+      .pub-chip {
         display: inline-flex;
         align-items: center;
         gap: 0.3rem;
@@ -735,9 +773,16 @@
         border: 1px solid color-mix(in oklab, var(--bd-accent) 46%, transparent);
         text-decoration: none;
       }
+      .pub-link {
+        text-decoration: none;
+      }
       .pub-link:hover {
         filter: brightness(1.05);
         background: color-mix(in oklab, var(--bd-accent) 8%, transparent);
+      }
+      .pub-tag {
+        background: color-mix(in oklab, var(--bd-accent) 12%, transparent);
+        cursor: default;
       }
       .people-grid {
         margin-top: 2rem;
@@ -957,12 +1002,11 @@
 
       <section id="news" class="container">
         <h3>News</h3>
-        <article class="card">
-          <p>
-            <time datetime="2025-10-19">19 Oct 2025</time> - Group website
-            launched!
-          </p>
-        </article>
+        <div class="news-feed" role="list" data-news-list>
+          <p class="muted" data-news-loading>Loading news...</p>
+        </div>
+        <p class="muted" data-news-empty hidden>No news available yet.</p>
+        <p class="muted" data-news-error hidden>Unable to load news right now.</p>
       </section>
 
       <section id="research" class="container">
@@ -1053,6 +1097,14 @@
           Instrumentation and labs enabling material synthesis, device fabrication, and system validation.
         </p>
         <div class="facilities-carousel" data-facilities-carousel>
+          <button
+            type="button"
+            class="facilities-arrow is-prev"
+            data-facilities-prev
+            aria-label="Show previous facility"
+          >
+            <span aria-hidden="true">&larr;</span>
+          </button>
           <div
             class="facilities-viewport"
             data-facilities-viewport
@@ -1063,7 +1115,14 @@
               <p class="muted" data-facilities-loading>Loading facilities...</p>
             </div>
           </div>
-          <div class="facilities-nav" data-facilities-nav hidden aria-label="Navigazione facilities"></div>
+          <button
+            type="button"
+            class="facilities-arrow is-next"
+            data-facilities-next
+            aria-label="Show next facility"
+          >
+            <span aria-hidden="true">&rarr;</span>
+          </button>
         </div>
         <p class="muted" data-facilities-error hidden>
           We're unable to load the facilities right now. Please try again later.
@@ -1235,6 +1294,84 @@
         startFacilityVideoPlayback(video);
       }
     };
+
+    // News data rendering
+    const newsList = document.querySelector('[data-news-list]');
+    const newsLoading = newsList?.querySelector('[data-news-loading]');
+    const newsEmpty = document.querySelector('[data-news-empty]');
+    const newsError = document.querySelector('[data-news-error]');
+
+    if (newsList) {
+      fetch('data/news.json')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch news data');
+          }
+          return response.json();
+        })
+        .then((newsItems) => {
+          if (!Array.isArray(newsItems)) {
+            throw new Error('News data is not an array');
+          }
+
+          newsList.innerHTML = '';
+
+          let renderedItems = 0;
+          const fragment = document.createDocumentFragment();
+          newsItems.forEach((item) => {
+            let text = '';
+            if (typeof item === 'string') {
+              text = item.trim();
+            } else if (item && typeof item.text === 'string') {
+              text = item.text.trim();
+            }
+            if (!text) {
+              return;
+            }
+
+            const article = document.createElement('article');
+            article.className = 'card';
+            article.setAttribute('role', 'listitem');
+
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            article.appendChild(paragraph);
+
+            fragment.appendChild(article);
+            renderedItems += 1;
+          });
+
+          if (renderedItems === 0) {
+            if (newsEmpty) {
+              newsEmpty.hidden = false;
+            }
+            return;
+          }
+
+          if (newsEmpty) {
+            newsEmpty.hidden = true;
+          }
+          if (newsError) {
+            newsError.hidden = true;
+          }
+
+          newsList.appendChild(fragment);
+        })
+        .catch(() => {
+          newsList.innerHTML = '';
+          if (newsEmpty) {
+            newsEmpty.hidden = true;
+          }
+          if (newsError) {
+            newsError.hidden = false;
+          }
+        })
+        .finally(() => {
+          if (newsLoading) {
+            newsLoading.remove();
+          }
+        });
+    }
 
     // Team data rendering
     const peopleGrid = document.querySelector('[data-people-grid]');
@@ -1680,25 +1817,35 @@
                 card.appendChild(summary);
               }
 
-              if (Array.isArray(publication.links) && publication.links.length > 0) {
-                const actions = document.createElement('div');
-                actions.className = 'pub-actions';
-                publication.links.forEach((link) => {
-                  if (!link?.url) {
-                    return;
-                  }
-                  const anchor = document.createElement('a');
-                  anchor.className = 'pub-link';
-                  anchor.href = link.url;
-                  anchor.rel = 'noopener';
-                  anchor.target = '_blank';
-                  anchor.textContent = link.label || 'Open';
-                  actions.appendChild(anchor);
-                });
-                if (actions.children.length > 0) {
-                  card.appendChild(actions);
-                }
+          if (Array.isArray(publication.links) && publication.links.length > 0) {
+            const actions = document.createElement('div');
+            actions.className = 'pub-actions';
+            publication.links.forEach((link) => {
+              const label =
+                typeof link?.label === 'string' ? link.label.trim() : '';
+              const url = typeof link?.url === 'string' ? link.url.trim() : '';
+              if (!label && !url) {
+                return;
               }
+              if (url) {
+                const anchor = document.createElement('a');
+                anchor.className = 'pub-chip pub-link';
+                anchor.href = url;
+                anchor.rel = 'noopener';
+                anchor.target = '_blank';
+                anchor.textContent = label || 'Open';
+                actions.appendChild(anchor);
+              } else if (label) {
+                const badge = document.createElement('span');
+                badge.className = 'pub-chip pub-tag';
+                badge.textContent = label;
+                actions.appendChild(badge);
+              }
+            });
+            if (actions.children.length > 0) {
+              card.appendChild(actions);
+            }
+          }
 
               item.appendChild(card);
               fragment.appendChild(item);
@@ -1720,28 +1867,36 @@
 
     const facilitiesViewport = document.querySelector('[data-facilities-viewport]');
     const facilitiesTrack = document.querySelector('[data-facilities-track]');
-    const facilitiesNav = document.querySelector('[data-facilities-nav]');
+    const facilitiesPrevButton = document.querySelector('[data-facilities-prev]');
+    const facilitiesNextButton = document.querySelector('[data-facilities-next]');
     const facilitiesLoading = facilitiesTrack?.querySelector('[data-facilities-loading]');
     const facilitiesError = document.querySelector('[data-facilities-error]');
     let activeFacilityCard = null;
     let facilityFocusRaf = null;
     let isProgrammaticFacilityScroll = false;
     let facilityResizeTimeout;
-    let facilityNavButtons = [];
+    let facilityData = [];
+    let realFacilityCards = [];
+    let leadingFacilityClones = [];
+    let trailingFacilityClones = [];
+    let currentFacilityIndex = 0;
+    let suppressFacilityLoopNormalization = false;
 
-    if (facilitiesNav) {
-      facilitiesNav.hidden = true;
-    }
-
-    const updateFacilityNavState = (card) => {
-      if (!facilitiesNav || facilityNavButtons.length === 0) {
-        return;
+    const facilityButtons = [facilitiesPrevButton, facilitiesNextButton];
+    facilityButtons.forEach((button) => {
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-disabled', 'true');
       }
-      const activeIndex = Number(card?.dataset?.navIndex);
-      facilityNavButtons.forEach((button, index) => {
-        const isActive = index === activeIndex;
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    const updateFacilityButtonsState = (isEnabled) => {
+      facilityButtons.forEach((button) => {
+        if (!button) {
+          return;
+        }
+        button.disabled = !isEnabled;
+        button.setAttribute('aria-disabled', isEnabled ? 'false' : 'true');
       });
     };
 
@@ -1755,8 +1910,11 @@
       activeFacilityCard = card || null;
       if (activeFacilityCard) {
         activeFacilityCard.classList.add('is-focused');
+        const index = Number(activeFacilityCard.dataset?.facilityIndex);
+        if (!Number.isNaN(index)) {
+          currentFacilityIndex = index;
+        }
       }
-      updateFacilityNavState(activeFacilityCard);
     };
 
     const requestFacilityFocusUpdate = () => {
@@ -1769,34 +1927,63 @@
       });
     };
 
-    const centerFacilityCard = (card, { smooth = false } = {}) => {
+    function centerFacilityCard(card, options = {}) {
       if (!facilitiesViewport || !card) {
         return;
       }
+      const { smooth = false, skipNormalization = false, onSettled } = options;
       const cardWidth = card.offsetWidth;
       if (!cardWidth) {
         return;
       }
-      const target =
-        card.offsetLeft - (facilitiesViewport.clientWidth - cardWidth) / 2;
+      if (skipNormalization) {
+        suppressFacilityLoopNormalization = true;
+      }
+      const target = card.offsetLeft - (facilitiesViewport.clientWidth - cardWidth) / 2;
       isProgrammaticFacilityScroll = true;
       facilitiesViewport.scrollTo({
         left: Math.max(0, target),
         behavior: smooth ? 'smooth' : 'auto',
       });
       setActiveFacilityCard(card);
-      if (smooth) {
-        window.setTimeout(() => {
-          isProgrammaticFacilityScroll = false;
-          requestFacilityFocusUpdate();
-        }, 380);
-      } else {
+      const complete = () => {
+        isProgrammaticFacilityScroll = false;
+        if (typeof onSettled === 'function') {
+          onSettled();
+        }
+        if (skipNormalization) {
+          suppressFacilityLoopNormalization = false;
+        }
         requestAnimationFrame(() => {
-          isProgrammaticFacilityScroll = false;
-          requestFacilityFocusUpdate();
+          if (!isProgrammaticFacilityScroll) {
+            requestFacilityFocusUpdate();
+          }
         });
+      };
+      if (smooth) {
+        window.setTimeout(complete, 380);
+      } else {
+        requestAnimationFrame(complete);
       }
-    };
+    }
+
+    function normalizeFacilityLoop() {
+      if (suppressFacilityLoopNormalization || isProgrammaticFacilityScroll) {
+        return;
+      }
+      if (!activeFacilityCard || activeFacilityCard.dataset?.clone !== 'true') {
+        return;
+      }
+      const index = Number(activeFacilityCard.dataset?.facilityIndex);
+      if (Number.isNaN(index)) {
+        return;
+      }
+      const fallbackCard = realFacilityCards[index];
+      if (!fallbackCard || fallbackCard === activeFacilityCard) {
+        return;
+      }
+      centerFacilityCard(fallbackCard);
+    }
 
     const updateFacilityFocus = () => {
       if (!facilitiesViewport || !facilitiesTrack) {
@@ -1823,6 +2010,7 @@
         return;
       }
       setActiveFacilityCard(bestCard);
+      normalizeFacilityLoop();
     };
 
     const handleFacilityScroll = () => {
@@ -1832,17 +2020,75 @@
       requestFacilityFocusUpdate();
     };
 
-    const scheduleFacilityResize = () => {
-      if (!activeFacilityCard) {
+    const goToFacilityIndex = (index, { smooth = true } = {}) => {
+      if (!Array.isArray(realFacilityCards) || realFacilityCards.length === 0) {
         return;
       }
+      const boundedIndex = ((index % realFacilityCards.length) + realFacilityCards.length) % realFacilityCards.length;
+      const targetCard = realFacilityCards[boundedIndex];
+      if (!targetCard) {
+        return;
+      }
+      if (smooth && realFacilityCards.length > 1) {
+        const isForwardWrap =
+          currentFacilityIndex === realFacilityCards.length - 1 && boundedIndex === 0;
+        const isBackwardWrap = currentFacilityIndex === 0 && boundedIndex === realFacilityCards.length - 1;
+        if (isForwardWrap) {
+          const clone = trailingFacilityClones[boundedIndex];
+          if (clone) {
+            centerFacilityCard(clone, {
+              smooth: true,
+              skipNormalization: true,
+              onSettled: () => centerFacilityCard(targetCard, { smooth: false }),
+            });
+            return;
+          }
+        } else if (isBackwardWrap) {
+          const clone = leadingFacilityClones[boundedIndex];
+          if (clone) {
+            centerFacilityCard(clone, {
+              smooth: true,
+              skipNormalization: true,
+              onSettled: () => centerFacilityCard(targetCard, { smooth: false }),
+            });
+            return;
+          }
+        }
+      }
+      centerFacilityCard(targetCard, { smooth });
+    };
+
+    const scheduleFacilityResize = () => {
       if (facilityResizeTimeout) {
         window.clearTimeout(facilityResizeTimeout);
       }
       facilityResizeTimeout = window.setTimeout(() => {
-        centerFacilityCard(activeFacilityCard);
+        if (realFacilityCards[currentFacilityIndex]) {
+          goToFacilityIndex(currentFacilityIndex, { smooth: false });
+        }
       }, 180);
     };
+
+    if (facilitiesPrevButton) {
+      facilitiesPrevButton.addEventListener('click', () => {
+        if (realFacilityCards.length === 0) {
+          return;
+        }
+        const previousIndex =
+          (currentFacilityIndex - 1 + realFacilityCards.length) % realFacilityCards.length;
+        goToFacilityIndex(previousIndex, { smooth: true });
+      });
+    }
+
+    if (facilitiesNextButton) {
+      facilitiesNextButton.addEventListener('click', () => {
+        if (realFacilityCards.length === 0) {
+          return;
+        }
+        const nextIndex = (currentFacilityIndex + 1) % realFacilityCards.length;
+        goToFacilityIndex(nextIndex, { smooth: true });
+      });
+    }
 
     if (facilitiesViewport && facilitiesTrack) {
       fetch('data/facilities.json')
@@ -1856,8 +2102,12 @@
           if (!Array.isArray(facilities) || facilities.length === 0) {
             throw new Error('Facilities data is empty');
           }
-          facilitiesTrack.innerHTML = '';
 
+          facilitiesTrack.innerHTML = '';
+          if (facilitiesError) {
+            facilitiesError.hidden = true;
+          }
+          facilityData = facilities.filter((item) => item && typeof item === 'object');
           const resolveAssetPath = (value) => {
             if (typeof value !== 'string' || !value.trim()) {
               return '';
@@ -1869,12 +2119,22 @@
             return `assets/facilities/${trimmed}`;
           };
 
-          const createFacilityCard = (facility, index) => {
+          const createFacilityCard = (facility, index, { isClone = false } = {}) => {
             const card = document.createElement('article');
             card.className = 'facility-card';
             card.dataset.facilityCard = 'true';
-            card.dataset.navIndex = String(index);
-            card.setAttribute('role', 'listitem');
+            card.dataset.facilityIndex = String(index);
+            if (isClone) {
+              card.dataset.clone = 'true';
+              card.setAttribute('aria-hidden', 'true');
+              card.setAttribute('role', 'presentation');
+              card.setAttribute('tabindex', '-1');
+            } else {
+              card.removeAttribute('aria-hidden');
+              card.setAttribute('role', 'listitem');
+              card.removeAttribute('tabindex');
+              delete card.dataset.clone;
+            }
 
             const mediaWrapper = document.createElement('div');
             mediaWrapper.className = 'facility-media';
@@ -1981,72 +2241,79 @@
             return card;
           };
 
-          const fragment = document.createDocumentFragment();
-          const realCards = [];
-
-          facilities.forEach((facility, index) => {
+          const mainFragment = document.createDocumentFragment();
+          realFacilityCards = [];
+          facilityData.forEach((facility, index) => {
             const card = createFacilityCard(facility, index);
             if (card) {
-              realCards.push(card);
-              fragment.appendChild(card);
+              realFacilityCards.push(card);
+              mainFragment.appendChild(card);
             }
           });
 
-          facilitiesTrack.appendChild(fragment);
+          facilitiesTrack.appendChild(mainFragment);
 
-          if (facilitiesNav) {
-            facilitiesNav.innerHTML = '';
-            facilityNavButtons = [];
-            if (realCards.length > 1) {
-              facilitiesNav.hidden = false;
-              const navFragment = document.createDocumentFragment();
-              realCards.forEach((card, index) => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.setAttribute('aria-pressed', 'false');
-                button.setAttribute(
-                  'aria-label',
-                  `Vai alla facility ${card.querySelector('h4')?.textContent || index + 1}`
-                );
-                button.addEventListener('click', () => {
-                  centerFacilityCard(card, { smooth: true });
-                });
-                navFragment.appendChild(button);
-                facilityNavButtons.push(button);
-              });
-              facilitiesNav.appendChild(navFragment);
-            } else {
-              facilitiesNav.hidden = true;
+          leadingFacilityClones = new Array(realFacilityCards.length).fill(null);
+          trailingFacilityClones = new Array(realFacilityCards.length).fill(null);
+
+          if (realFacilityCards.length > 1) {
+            const cloneCount = Math.min(realFacilityCards.length, 2);
+            const leadingFragment = document.createDocumentFragment();
+            const trailingFragment = document.createDocumentFragment();
+
+            for (let i = 0; i < cloneCount; i += 1) {
+              const sourceIndex = realFacilityCards.length - cloneCount + i;
+              const facility = facilityData[sourceIndex];
+              if (!facility) {
+                continue;
+              }
+              const clone = createFacilityCard(facility, sourceIndex, { isClone: true });
+              if (clone) {
+                leadingFragment.appendChild(clone);
+                leadingFacilityClones[sourceIndex] = clone;
+              }
             }
+            facilitiesTrack.prepend(leadingFragment);
+
+            for (let i = 0; i < cloneCount; i += 1) {
+              const sourceIndex = i;
+              const facility = facilityData[sourceIndex];
+              if (!facility) {
+                continue;
+              }
+              const clone = createFacilityCard(facility, sourceIndex, { isClone: true });
+              if (clone) {
+                trailingFragment.appendChild(clone);
+                trailingFacilityClones[sourceIndex] = clone;
+              }
+            }
+            facilitiesTrack.appendChild(trailingFragment);
           }
 
-          if (realCards.length > 0) {
+          facilitiesTrack
+            .querySelectorAll('[data-facility-video]')
+            .forEach((video) => observeFacilityVideo(video));
+
+          updateFacilityButtonsState(realFacilityCards.length > 1);
+
+          if (realFacilityCards.length > 0) {
+            currentFacilityIndex = realFacilityCards.length >= 2 ? 1 : 0;
+            const initialCard = realFacilityCards[currentFacilityIndex] || realFacilityCards[0];
             requestAnimationFrame(() => {
-              const initialIndex = realCards.length >= 2 ? 1 : 0;
-              const initialCard = realCards[initialIndex];
               if (initialCard) {
                 centerFacilityCard(initialCard);
-                setActiveFacilityCard(initialCard);
-                requestFacilityFocusUpdate();
               }
             });
           }
 
           facilitiesViewport.addEventListener('scroll', handleFacilityScroll, { passive: true });
           window.addEventListener('resize', scheduleFacilityResize);
-
-          facilitiesTrack
-            .querySelectorAll('[data-facility-video]')
-            .forEach((video) => observeFacilityVideo(video));
         })
         .catch(() => {
           if (facilitiesError) {
             facilitiesError.hidden = false;
           }
-          if (facilitiesNav) {
-            facilitiesNav.hidden = true;
-            facilitiesNav.innerHTML = '';
-          }
+          updateFacilityButtonsState(false);
         })
         .finally(() => {
           if (facilitiesLoading) {

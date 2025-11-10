@@ -40,7 +40,7 @@
     "poster": "microfab_suite.jpg"
   },
   {
-    "name": "Print & Microfabrication Suite",
+    "name": "V-One microdispensing system",
     "description": "Dedicated room for inkjet, screen printing, laser patterning and UV curing on flexible substrates.",
     "capabilities": ["inkjet printing", "screen printing", "laser ablation"],
     "specs": [
@@ -52,7 +52,7 @@
     "poster": "microfab_suite.jpg"
   },
   {
-    "name": "Characterization & Test Lab",
+    "name": "NOVA V-One microdispensing system",
     "description": "Electrical probing, environmental cycling, and mechanical reliability rigs for transient electronics.",
     "capabilities": [
       "electrical test",
@@ -64,7 +64,7 @@
       "Humidity chambers 10-95 %RH",
       "Dynamic bending radius down to 5 mm"
     ],
-    "video": "characterization_lab.mp4",
+    "video": "V-One.mp4",
     "poster": "characterization_lab.jpg"
   }
 ]
