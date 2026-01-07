@@ -39,7 +39,7 @@
     "description": "Functional mode of the HR20 rheometer for tribological testing including friction and wear measurements",
     "capabilities": [
       "Coefficient of friction",
-      "Oils and greases viscosity",
+      "Oils and greases viscosity"
     ],
     "specs": [
       "Ball on Three Balls test geometry",
