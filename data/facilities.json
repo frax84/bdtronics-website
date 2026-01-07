@@ -35,6 +35,23 @@
     "poster": "HR20-DMA.jpg"
   },
   {
+    "name": "TA Instruments HR20 - Tribo Rheometry",
+    "description": "Functional mode of the HR20 rheometer for tribological testing including friction and wear measurements",
+    "capabilities": [
+      "Coefficient of friction",
+      "Oils and greases viscosity",
+    ],
+    "specs": [
+      "Ball on Three Balls test geometry",
+      "Ring on plate test geometry",
+      "Temperature up to 150°C",
+      "Maximum load force: 24 N",
+      "Max sliding speed: 4.5 m/s"
+    ],
+    "video": "HR20-Tribo.mp4",
+    "poster": "HR20-Tribo.jpg"
+  },
+  {
     "name": "TA Instruments TGA-55",
     "description": "A research-grade thermogravimetric analyzer for precise mass-change measurements as a function of temperature and atmosphere.",
     "capabilities": [
