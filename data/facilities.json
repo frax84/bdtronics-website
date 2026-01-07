@@ -1,6 +1,6 @@
 [
   {
-    "name": "TA Instruments HR20",
+    "name": "TA Instruments HR20 - Rheometer",
     "description": "A multi-purpose hybrid rheometer for advanced material characterization including shear and normal force control, oscillatory and steady flow tests",
     "capabilities": [
       "rheology",
@@ -15,6 +15,24 @@
     ],
     "video": "HR20.mp4",
     "poster": "HR20.jpg"
+  },
+  {
+    "name": "TA Instruments HR20 - Dynamic Mechanical Analyzer",
+    "description": "Functional mode of the HR20 rheometer for dynamic mechanical analysis (DMA) of solid materials including tensile, 3-point bend, compression and shear testing",
+    "capabilities": [
+      "dynamic mechanical analysis (DMA)",
+      "solid material property measurements",
+      "multiple testing modes"
+    ],
+    "specs": [
+      "Minimum Force in Oscillation: 3mN",
+      "Maximum Axial force: 50 N",
+      "Min-Max Displacement in Oscillation: 0.01-100 mm",
+      "Axial Frequency range: 10-5 to 100 Hz",
+      "Direct measurement of E', E'', and tan 𝛿 in tension"
+    ],
+    "video": "HR20-DMA.mp4",
+    "poster": "HR20-DMA.jpg"
   },
   {
     "name": "TA Instruments TGA-55",
@@ -48,7 +66,7 @@
     "video": "All-in-one.mp4",
     "poster": "All-in-one.jpg"
   },
-    {
+  {
     "name": "Voltera NOVA",
     "description": "A materials-dispensing platform for prototyping flexible hybrid electronics (FHE).",
     "capabilities": [
@@ -63,37 +81,37 @@
     "video": "Nova.mp4",
     "poster": "Nova.jpg"
   },
-{
-  "name": "Voltera V-One",
-  "description": "Desktop direct-write dispensing system for prototyping printed circuit boards: prints conductive ink traces, drills vias/holes, dispenses solder paste and reflows components on a heated bed.",
-  "capabilities": [
-    "conductive ink printing",
-    "drilling vias/holes",
-    "heated bed reflow/cure"
-  ],
-  "specs": [
-    "Minimum trace width 0.2 mm",
-    "Print area (W x D x H) 128 x 116 x 3 mm",
-    "XYZ resolution ~10 µm x 10 µm x 1 µm",
-    "Max heated bed temperature 240 °C"
-  ],
-  "video": "V-One.mp4",
-  "poster": "V-One.jpg"
-},
-{
-  "name": "Formlabs Form 4B",
-  "description": "A high-performance SLA 3D printer built for medical applications offering biocompatible and sterilizable materials with precision and reliability.",
-  "capabilities": [
-    "stereolithography (SLA) resin printing",
-    "biocompatible & sterilizable parts production"
-  ],
-  "specs": [
-    "Build volume: 200 x 125 x 210 mm",
-    "XY resolution: ~50 µm pixel size",
-    "Layer thickness: 25-300 µm",
-    "Print speed: up to ~80 mm/h"
-  ],
-  "video": "Form4B.mp4",
-  "poster": "Form4B.jpg"
-}
+  {
+    "name": "Voltera V-One",
+    "description": "Desktop direct-write dispensing system for prototyping printed circuit boards: prints conductive ink traces, drills vias/holes, dispenses solder paste and reflows components on a heated bed.",
+    "capabilities": [
+      "conductive ink printing",
+      "drilling vias/holes",
+      "heated bed reflow/cure"
+    ],
+    "specs": [
+      "Minimum trace width 0.2 mm",
+      "Print area (W x D x H) 128 x 116 x 3 mm",
+      "XYZ resolution ~10 µm x 10 µm x 1 µm",
+      "Max heated bed temperature 240 °C"
+    ],
+    "video": "V-One.mp4",
+    "poster": "V-One.jpg"
+  },
+  {
+    "name": "Formlabs Form 4B",
+    "description": "A high-performance SLA 3D printer built for medical applications offering biocompatible and sterilizable materials with precision and reliability.",
+    "capabilities": [
+      "stereolithography (SLA) resin printing",
+      "biocompatible & sterilizable parts production"
+    ],
+    "specs": [
+      "Build volume: 200 x 125 x 210 mm",
+      "XY resolution: ~50 µm pixel size",
+      "Layer thickness: 25-300 µm",
+      "Print speed: up to ~80 mm/h"
+    ],
+    "video": "Form4B.mp4",
+    "poster": "Form4B.jpg"
+  }
 ]
