@@ -39,14 +39,14 @@
     "venue": "IEEE International Workshop on Metrology for Sustainability (MetroSustainability)",
     "type": "conference",
     "authors": [
-      "Rocco Carcione"
+      "Rocco Carcione",
 	  "Elena Palmieri",
 	  "Luca Montaina",
 	  "Ivano Lucarini",
 	  "Tamara Posati",
-	  "Francesco Maita"
+	  "Francesco Maita",
 	  "Alessia Cemmi",
-      "Luca Maiolo",	  
+      "Luca Maiolo"  
     ],
     "summary": "Describes a biodegradable and non-toxic SERS sensor based on MgFe hydrotalcite nanoplatelets for detecting cypermethrin, a common pyrethroid pesticide ",
     "links": [
@@ -60,7 +60,7 @@
     "type": "conference",
     "authors": [
       "Elena Palmieri",
-	  "Rocco Carcione"
+	  "Rocco Carcione",
 	  "Luca Maiolo",
 	  "Luca Montaina",
 	  "Beatrice D'Orsi",
@@ -120,7 +120,7 @@
       "Elena Palmieri",
 	  "Francesco Maita",
 	  "Ivano Lucarini",
-	  "Jose Ignacio Del Rio De Vicente"
+	  "Jose Ignacio Del Rio De Vicente",
       "Antonio Minotti",
       "Luca Maiolo"
     ],
@@ -175,7 +175,7 @@
       "Elena Palmieri",
 	  "Francesco Maita",
 	  "Alessandra Pellegrino",
-	  "Giovanni Avola"
+	  "Giovanni Avola",
       "Miriam Distefano",
       "Luca Maiolo"
     ],
