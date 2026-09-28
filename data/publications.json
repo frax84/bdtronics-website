@@ -1,4 +1,44 @@
-[{
+[ {
+    "title": "Evaluating the effects of gamma irradiation on early 20th-century paper for paper-based cultural heritage preservation using non-destructive and minimally destructive techniques",	
+    "year": 2026,
+    "venue": "Acta IMEKO",
+    "type": "journal",
+    "authors": [
+      "Rocco Carcione",
+	  "Beatrice D'Orsi",
+	  "Elena Palmieri",	  
+	  "Jessica Scifo",
+	  "Ilaria Di Sarcina",
+	  "Luca Maiolo",
+	  "Francesco Maita",
+	  "Alessia Cemmi"
+    ],
+    "summary": "This study investigates the secondary effects of gamma irradiation on early 20th-century paper samples from historical books, aiming to evaluate the suitability of this method for preserving cultural heritage (CH) materials",
+    "links": [
+      { "label": "DOI", "url": "https://acta.imeko.org/index.php/acta-imeko/article/view/2125" }
+    ]
+  },
+{
+    "title": "Cellulose as a Platform for Biodegradable Metasurfaces: THz Characterization and Fabrication",	
+    "year": 2026,
+    "venue": "Advanced Sustainable Systems",
+    "type": "journal",
+    "authors": [
+      "Edoardo Negri",
+	  "Elena Palmieri",	  
+	  "Luca Montaina",
+	  "Dimitrios C Zografopoulos",
+	  "Romeo Beccherelli",
+      "Luca Maiolo",
+	  "Walter Fuscaldo",
+	  "Francesco Maita"
+    ],
+    "summary": "Demonstrate a biodegradable metasuperface on cellulose substrates achieving nearly perfect absorption at predetermined THz frequencies",
+    "links": [
+      { "label": "DOI", "url": "https://doi.org/10.1002/adsu.70609" }
+    ]
+  },
+{
     "title": "Flexible and Biodegradable Cellulose Counter‐Electrode in Aqueous‐Based Dye‐Sensitized Solar Cells",	
     "year": 2026,
     "venue": "Macromolecular Materials and Engineering",
